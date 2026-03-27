@@ -2,7 +2,7 @@
 
 Use this before training:
 - `PRE-COURSE-REFRESHER.md`
-- `questions-md/README.md`
+- `questions/README.md`
 
 Suggested flow:
 1. Read the refresher once end-to-end.

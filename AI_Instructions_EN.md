@@ -147,7 +147,7 @@ Behind this gateway you have:
 
 For a more detailed lightweight-profile walkthrough, URLs, and verification steps, use:
 
-- [awesome-localstack/STUDENT_GUIDE.md](https://github.com/slawekradzyminski/awesome-localstack/blob/main/STUDENT_GUIDE.md)
+- [awesome-localstack/docs/STUDENT_GUIDE.md](https://github.com/slawekradzyminski/awesome-localstack/blob/main/docs/STUDENT_GUIDE.md)
 
 <a id="verification-section"></a>
 # 5. Verify the Environment

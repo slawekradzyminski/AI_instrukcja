@@ -142,7 +142,7 @@ Za tą bramką dostępne są:
 
 Szczegółowy opis lekkiego profilu, adresów oraz kroków weryfikacyjnych znajdziecie tutaj:
 
-- [awesome-localstack/STUDENT_GUIDE.md](https://github.com/slawekradzyminski/awesome-localstack/blob/main/STUDENT_GUIDE.md)
+- [awesome-localstack/docs/STUDENT_GUIDE.md](https://github.com/slawekradzyminski/awesome-localstack/blob/main/docs/STUDENT_GUIDE.md)
 
 <a id="sekcja-weryfikacja"></a>
 # 5. Weryfikacja środowiska

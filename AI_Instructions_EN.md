@@ -99,6 +99,12 @@ You can easily switch between versions, for example 20 and 22.
 - [https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)
 - [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.exe) (direct installer link)
 
+If you run into access or command execution issues on Windows with PowerShell, running this command may help:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+```
+
 **Verification**
 
 ```bash

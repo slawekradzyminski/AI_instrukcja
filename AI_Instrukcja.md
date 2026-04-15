@@ -99,6 +99,12 @@ Można łatwo przełączać się pomiędzy wersjami (np. 20, 22).
 - [https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)
 - [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.exe) (bezpośredni link do instalatora)
 
+Jeśli na Windowsie i PowerShellu pojawią się problemy z dostępem lub uruchamianiem komend, może pomóc uruchomienie:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+```
+
 **Weryfikacja**
 
 ```bash

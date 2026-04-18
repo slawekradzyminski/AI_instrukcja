@@ -145,6 +145,7 @@ Za tą bramką dostępne są:
 - Swagger UI
 - obrazy produktów pod `/images/...`
 - mock LLM pod osobnym porcie `11434`
+- Keycloak / SSO pod osobnym portem `8082`
 
 Szczegółowy opis lekkiego profilu, adresów oraz kroków weryfikacyjnych znajdziecie tutaj:
 
@@ -160,6 +161,7 @@ docker compose -f lightweight-docker-compose.yml ps
 curl -i http://localhost:8081/login
 curl -i http://localhost:8081/v3/api-docs
 curl -i http://localhost:8081/images/iphone.png
+curl -i http://localhost:8082/realms/awesome-testing/.well-known/openid-configuration
 curl -i -X POST http://localhost:11434/api/generate \
   -H 'Content-Type: application/json' \
   -d '{"model":"qwen3.5:2b","prompt":"hello"}'
@@ -171,18 +173,27 @@ Oczekiwany rezultat:
 - strona logowania odpowiada `200`
 - OpenAPI odpowiada `200`
 - obrazek produktu odpowiada `200`
+- konfiguracja OpenID Connect w Keycloak odpowiada `200`
 - mock LLM odpowiada `200`
 
 Przydatne adresy do sprawdzenia w przeglądarce:
 
 - aplikacja: `http://localhost:8081/login`
 - Swagger: `http://localhost:8081/swagger-ui/index.html`
+- Keycloak: `http://localhost:8082`
+
+Lokalne dane logowania:
+
+- klasyczne logowanie w aplikacji: `client` / `client`
+- klasyczne konto administratora: `admin` / `LocalDemoAdmin123!`
+- SSO przez Keycloak: `sso-client` / `SsoClient123!`
+- panel administracyjny Keycloak: `admin` / `admin`
 
 Jeśli coś jeszcze się uruchamia, najpierw sprawdźcie logi:
 
 ```bash
 docker compose -f lightweight-docker-compose.yml logs -f backend gateway
-docker compose -f lightweight-docker-compose.yml logs -f ollama-mock
+docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
 ```
 
 <a id="sekcja-testy"></a>

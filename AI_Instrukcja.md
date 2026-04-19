@@ -187,6 +187,8 @@ Lokalne dane logowania:
 - klasyczne logowanie w aplikacji: `client` / `client`
 - klasyczne konto administratora: `admin` / `LocalDemoAdmin123!`
 - SSO przez Keycloak: `sso-client` / `SsoClient123!`
+- Social login (Google mock): `google-user` / `GoogleUser123!`
+- Social login (GitHub mock): `github-user` / `GitHubUser123!`
 - panel administracyjny Keycloak: `admin` / `admin`
 
 Jeśli coś jeszcze się uruchamia, najpierw sprawdźcie logi:

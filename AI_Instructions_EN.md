@@ -192,6 +192,8 @@ Local credentials:
 - standard app login: `client` / `client`
 - standard administrator account: `admin` / `LocalDemoAdmin123!`
 - SSO through Keycloak: `sso-client` / `SsoClient123!`
+- Social login (Google mock): `google-user` / `GoogleUser123!`
+- Social login (GitHub mock): `github-user` / `GitHubUser123!`
 - Keycloak admin console: `admin` / `admin`
 
 If something is still starting, check logs first:

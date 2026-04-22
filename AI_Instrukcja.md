@@ -23,7 +23,7 @@ Podstawowy scenariusz na szkoleniu opiera się na lekkim profilu Dockera (`light
 
 1. [Instalujemy GIT](#sekcja-git)
 2. [Narzędzia AI do szkolenia](#sekcja-ai-tools)
-3. [Instalujemy Node.js 24 (LTS)](#sekcja-node)
+3. [Instalujemy aktualną wersję LTS Node.js (obecnie 24)](#sekcja-node)
    - [MacOS](#macos)
    - [Windows](#windows)
 4. [Pobranie i instalacja testowanej aplikacji + środowiska](#sekcja-srodowisko)
@@ -82,13 +82,13 @@ Ważne: **inference nie jest darmowa**.
 Nawet gdy narzędzie ma plan Free albo jest open-source, zwykle i tak pojawiają się limity użycia i/lub koszt modeli (tokeny, kredyty, API).
 
 <a id="sekcja-node"></a>
-# 3. Instalujemy Node.js 24 (LTS)
+# 3. Instalujemy aktualną wersję LTS Node.js (obecnie 24)
 
 Potrzebne do pracy z kodem testów.
 
 Gorąco polecam zainstalować `nvm` (Node Version Manager).
 To najwygodniejszy sposób zarządzania wersjami Node.js na komputerze.
-Można łatwo przełączać się pomiędzy wersjami (np. 20, 22).
+Na potrzeby szkolenia używamy tylko aktualnej wersji LTS Node.js (obecnie 24).
 
 ## MacOS
 
@@ -109,7 +109,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 
 ```bash
 slawek playwright-2025 (master) $ node --version
-v24.11.0
+v24.x.x
 ```
 
 <a id="sekcja-srodowisko"></a>

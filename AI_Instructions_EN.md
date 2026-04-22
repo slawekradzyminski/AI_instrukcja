@@ -23,7 +23,7 @@ The default classroom scenario is based on the lightweight Docker profile, so th
 
 1. [Install Git](#git-section)
 2. [AI tools for the training](#ai-tools-section)
-3. [Install Node.js 24 (LTS)](#node-section)
+3. [Install the current Node.js LTS version (currently 24)](#node-section)
    - [macOS](#macos)
    - [Windows](#windows)
 4. [Download and install the tested app + environment](#environment-section)
@@ -82,13 +82,13 @@ Important: **inference is not free**.
 Even when a tool has a free plan or is open source, there are usually still usage limits and/or model costs.
 
 <a id="node-section"></a>
-# 3. Install Node.js 24 (LTS)
+# 3. Install the Current Node.js LTS Version (Currently 24)
 
 Node.js is required for the test code.
 
 I strongly recommend installing `nvm` (Node Version Manager).
 It is the most convenient way to manage Node.js versions on your computer.
-You can easily switch between versions, for example 20 and 22.
+For the training, use only the current Node.js LTS version, which is currently 24.
 
 ## macOS
 
@@ -114,7 +114,7 @@ node --version
 Expected version:
 
 ```bash
-v24.11.0
+v24.x.x
 ```
 
 <a id="environment-section"></a>

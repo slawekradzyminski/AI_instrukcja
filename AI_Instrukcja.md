@@ -1,4 +1,8 @@
+# Przygotowanie środowiska do szkolenia z Playwright i AI
+
 Poniżej znajdziecie organizacyjne informacje oraz aktualną instrukcję przygotowania środowiska na szkolenie.
+Instrukcja została zweryfikowana 23 sierpnia 2026 r. z repozytorium `playwright-2026`
+i lekkim profilem `awesome-localstack` uruchomionym lokalnie.
 Proszę o sumienne przygotowanie. Jeśli pojawią się trudności techniczne, niczym się nie martwcie.
 Wszystkie problemy rozwiążemy wspólnie na szkoleniu.
 Można też skontaktować się ze mną wcześniej mailowo:
@@ -11,7 +15,7 @@ Prywatny komputer z pełnymi uprawnieniami administratora daje większą elastyc
 
 Poza teorią podczas szkolenia będziemy pracować na projekcie:
 
-- [https://github.com/slawekradzyminski/playwright-2025](https://github.com/slawekradzyminski/playwright-2025)
+- [https://github.com/slawekradzyminski/playwright-2026](https://github.com/slawekradzyminski/playwright-2026)
 
 Tutaj jest środowisko aplikacyjne, na którym będziemy pracować:
 
@@ -39,11 +43,11 @@ Potrzebne do synchronizacji kodu w czasie szkolenia.
 
 Jeśli nie czujecie się pewnie z instalacją przez terminal, w powyższej instrukcji znajdziecie też linki do klasycznych instalatorów dla Windows i Mac.
 
-- Mac: [https://sourceforge.net/projects/git-osx-installer/](https://sourceforge.net/projects/git-osx-installer/)
+- macOS: [https://git-scm.com/download/mac](https://git-scm.com/download/mac)
 - Windows: [https://git-scm.com/download/win](https://git-scm.com/download/win)
 
 <a id="sekcja-ai-tools"></a>
-# 2. Narzedzia AI do szkolenia
+# 2. Narzędzia AI do szkolenia
 
 Możecie pracować na dowolnym narzędziu, którego używacie w pracy.
 Jeśli na co dzień korzystacie z GitHub Copilot, Windsurf, Claude Code albo innego asystenta, zostańcie przy swoim pracowym workflow.
@@ -78,6 +82,22 @@ Jeśli nie chcecie płacić za wersje Pro, sensowne alternatywy CLI/open-source:
 - Kilo Code: [https://kilocode.ai/](https://kilocode.ai/)
 - OpenCode: [https://opencode.ai/](https://opencode.ai/)
 
+Subskrypcje wykorzystujące modele chińskich dostawców również są odpowiednie do szkolenia.
+Liczy się przede wszystkim to, czy agent potrafi pracować na lokalnym repozytorium, edytować pliki
+i uruchamiać komendy oraz testy. Aktualne opcje to między innymi:
+
+- **Qwen Code + Alibaba Cloud Coding Plan**:
+  [dokumentacja Qwen Code](https://qwenlm.github.io/qwen-code-docs/en/)
+- **Kimi Code**:
+  [dokumentacja i instalacja Kimi Code](https://www.kimi.com/code/docs/en/kimi-code-cli/guides/getting-started.html)
+- **GLM Coding Plan (Z.AI)**, działający między innymi z Claude Code, OpenCode, Kilo Code i Cline:
+  [oficjalny quick start](https://docs.z.ai/devpack/quick-start)
+
+Agent powinien działać na tym samym komputerze co aplikacja albo mieć możliwość uruchamiania
+komend w lokalnym terminalu. Agent działający wyłącznie w zdalnej chmurze zwykle nie zobaczy
+Waszego `http://localhost:8081` bez dodatkowej konfiguracji. Nie wklejajcie kluczy API do promptów,
+plików repozytorium ani logów udostępnianych innym osobom.
+
 Ważne: **inference nie jest darmowa**.
 Nawet gdy narzędzie ma plan Free albo jest open-source, zwykle i tak pojawiają się limity użycia i/lub koszt modeli (tokeny, kredyty, API).
 
@@ -90,25 +110,30 @@ Gorąco polecam zainstalować `nvm` (Node Version Manager).
 To najwygodniejszy sposób zarządzania wersjami Node.js na komputerze.
 Na potrzeby szkolenia używamy tylko aktualnej wersji LTS Node.js (obecnie 24).
 
-## MacOS
+## macOS
 
-[https://tecadmin.net/install-nvm-macos-with-homebrew/](https://tecadmin.net/install-nvm-macos-with-homebrew/)
+[Oficjalna instrukcja instalacji nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
 ## Windows
 
 - [https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)
-- [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.exe) (bezpośredni link do instalatora)
+- [Najnowsza wersja nvm-windows](https://github.com/coreybutler/nvm-windows/releases/latest)
 
 Jeśli na Windowsie i PowerShellu pojawią się problemy z dostępem lub uruchamianiem komend, może pomóc uruchomienie:
 
 ```powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
 
 **Weryfikacja**
 
 ```bash
-slawek playwright-2025 (master) $ node --version
+node --version
+```
+
+Oczekiwana wersja:
+
+```bash
 v24.x.x
 ```
 
@@ -121,11 +146,12 @@ W razie problemów możemy też zainstalować frontend i backend alternatywną d
 Instrukcja instalacji Dockera i Docker Compose:
 [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 
-Firmy często korzystają alternatywnie z Ranchera:
-[https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade)
+Alternatywą dla Docker Desktop może być Rancher Desktop:
+[https://docs.rancherdesktop.io/getting-started/installation/](https://docs.rancherdesktop.io/getting-started/installation/)
 
 ```bash
 git clone https://github.com/slawekradzyminski/awesome-localstack
+cd awesome-localstack
 ```
 
 Wewnątrz pobranego folderu uruchamiamy lekki profil szkoleniowy:
@@ -169,7 +195,7 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Oczekiwany rezultat:
 
-- kontenery są w stanie `Up`
+- serwisy `backend`, `frontend`, `gateway`, `keycloak` i `ollama-mock` są w stanie `Up`
 - strona logowania odpowiada `200`
 - OpenAPI odpowiada `200`
 - obrazek produktu odpowiada `200`
@@ -181,6 +207,9 @@ Przydatne adresy do sprawdzenia w przeglądarce:
 - aplikacja: `http://localhost:8081/login`
 - Swagger: `http://localhost:8081/swagger-ui/index.html`
 - Keycloak: `http://localhost:8082`
+
+W Windows PowerShell można użyć `curl.exe` zamiast `curl`, jeśli ta nazwa jest
+przechwytywana przez alias PowerShella.
 
 Lokalne dane logowania:
 
@@ -202,14 +231,15 @@ docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
 # 6. Pobranie repozytorium z testami
 
 ```bash
-git clone https://github.com/slawekradzyminski/playwright-2025
+git clone https://github.com/slawekradzyminski/playwright-2026
+cd playwright-2026
 ```
 
 Uruchamiamy:
 
 ```bash
-npm install
-npx playwright install
+npm ci
+npx playwright install chromium
 npx playwright test
 ```
 

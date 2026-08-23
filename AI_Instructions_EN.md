@@ -1,4 +1,8 @@
+# Playwright and AI Training Environment Setup
+
 Below you will find organizational information and the current environment setup guide for the training.
+This guide was verified on August 23, 2026 with the `playwright-2026` repository
+and the lightweight `awesome-localstack` profile running locally.
 Please prepare carefully. If you run into technical issues, do not worry.
 We will solve all problems together during the training.
 You can also contact me earlier by email:
@@ -11,7 +15,7 @@ A personal computer with full administrator privileges gives more flexibility wh
 
 In addition to theory, during the training we will work on this project:
 
-- [https://github.com/slawekradzyminski/playwright-2025](https://github.com/slawekradzyminski/playwright-2025)
+- [https://github.com/slawekradzyminski/playwright-2026](https://github.com/slawekradzyminski/playwright-2026)
 
 This is the application environment we will use during the course:
 
@@ -39,7 +43,7 @@ Git is required to synchronize code during the training.
 
 If you are not comfortable with terminal-based installation, the guide above also includes links to classic installers for Windows and macOS.
 
-- macOS: [https://sourceforge.net/projects/git-osx-installer/](https://sourceforge.net/projects/git-osx-installer/)
+- macOS: [https://git-scm.com/download/mac](https://git-scm.com/download/mac)
 - Windows: [https://git-scm.com/download/win](https://git-scm.com/download/win)
 
 <a id="ai-tools-section"></a>
@@ -78,6 +82,22 @@ If you do not want to pay for Pro versions, reasonable CLI/open-source alternati
 - Kilo Code: [https://kilocode.ai/](https://kilocode.ai/)
 - OpenCode: [https://opencode.ai/](https://opencode.ai/)
 
+Subscriptions backed by Chinese model providers are also suitable for this training.
+What matters most is whether the agent can work in a local repository, edit files, and run
+commands and tests. Current options include:
+
+- **Qwen Code + Alibaba Cloud Coding Plan**:
+  [Qwen Code documentation](https://qwenlm.github.io/qwen-code-docs/en/)
+- **Kimi Code**:
+  [Kimi Code installation guide](https://www.kimi.com/code/docs/en/kimi-code-cli/guides/getting-started.html)
+- **GLM Coding Plan (Z.AI)**, supported by tools including Claude Code, OpenCode, Kilo Code, and Cline:
+  [official quick start](https://docs.z.ai/devpack/quick-start)
+
+The agent should run on the same computer as the application or be able to execute commands
+in your local terminal. An agent running only in a remote cloud environment usually cannot see
+your `http://localhost:8081` without additional configuration. Do not paste API keys into prompts,
+repository files, or logs shared with other people.
+
 Important: **inference is not free**.
 Even when a tool has a free plan or is open source, there are usually still usage limits and/or model costs.
 
@@ -92,17 +112,17 @@ For the training, use only the current Node.js LTS version, which is currently 2
 
 ## macOS
 
-[https://tecadmin.net/install-nvm-macos-with-homebrew/](https://tecadmin.net/install-nvm-macos-with-homebrew/)
+[Official nvm installation guide](https://github.com/nvm-sh/nvm#installing-and-updating)
 
 ## Windows
 
 - [https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)
-- [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.exe) (direct installer link)
+- [Latest nvm-windows release](https://github.com/coreybutler/nvm-windows/releases/latest)
 
 If you run into access or command execution issues on Windows with PowerShell, running this command may help:
 
 ```powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
 
 **Verification**
@@ -126,11 +146,12 @@ If necessary, we can also install the frontend and backend in an alternative way
 Docker and Docker Compose installation guide:
 [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 
-Some companies also use Rancher:
-[https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade)
+Rancher Desktop can be used as an alternative to Docker Desktop:
+[https://docs.rancherdesktop.io/getting-started/installation/](https://docs.rancherdesktop.io/getting-started/installation/)
 
 ```bash
 git clone https://github.com/slawekradzyminski/awesome-localstack
+cd awesome-localstack
 ```
 
 Inside the downloaded folder, start the lightweight training profile:
@@ -174,7 +195,7 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Expected result:
 
-- containers are in the `Up` state
+- the `backend`, `frontend`, `gateway`, `keycloak`, and `ollama-mock` services are in the `Up` state
 - the login page returns `200`
 - OpenAPI returns `200`
 - the product image returns `200`
@@ -186,6 +207,9 @@ Useful browser URLs:
 - app: `http://localhost:8081/login`
 - Swagger: `http://localhost:8081/swagger-ui/index.html`
 - Keycloak: `http://localhost:8082`
+
+In Windows PowerShell, use `curl.exe` instead of `curl` if the name is intercepted
+by a PowerShell alias.
 
 Local credentials:
 
@@ -207,14 +231,15 @@ docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
 # 6. Download the Test Repository
 
 ```bash
-git clone https://github.com/slawekradzyminski/playwright-2025
+git clone https://github.com/slawekradzyminski/playwright-2026
+cd playwright-2026
 ```
 
 Run:
 
 ```bash
-npm install
-npx playwright install
+npm ci
+npx playwright install chromium
 npx playwright test
 ```
 

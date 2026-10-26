@@ -71,21 +71,21 @@ If you do not currently have access to any tool, these are all reasonable option
    - If you choose Copilot, I also recommend setting up the CLI:
      [https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-getting-started](https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-getting-started)
 
-3. **Cursor**
+2. **Cursor**
    - Product page and pricing: [https://cursor.com/pricing](https://cursor.com/pricing)
    - If you prefer terminal-based work, Cursor CLI is also a good option:
      [https://docs.cursor.com/tools/cli](https://docs.cursor.com/tools/cli)
 
-4. **Windsurf**
+3. **Windsurf**
    - Editor: [https://windsurf.com/windsurf](https://windsurf.com/windsurf)
 
-5. **Codex (OpenAI, app/IDE/CLI)**
+4. **Codex (OpenAI, app/IDE/CLI)**
    - Codex: [https://openai.com/codex/](https://openai.com/codex/)
    - Codex app: [https://openai.com/index/introducing-the-codex-app/](https://openai.com/index/introducing-the-codex-app/)
    - Codex CLI: [https://github.com/openai/codex](https://github.com/openai/codex)
    - ChatGPT pricing: [https://openai.com/chatgpt/pricing](https://openai.com/chatgpt/pricing)
 
-6. **Claude Code (Anthropic)**
+5. **Claude Code (Anthropic)**
    - Documentation: [https://docs.anthropic.com/en/docs/claude-code/overview](https://docs.anthropic.com/en/docs/claude-code/overview)
    - Cost management: [https://docs.anthropic.com/en/docs/claude-code/costs](https://docs.anthropic.com/en/docs/claude-code/costs)
    - Pricing: [https://claude.com/pricing](https://claude.com/pricing)

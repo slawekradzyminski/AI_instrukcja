@@ -26,13 +26,14 @@ Podstawowy scenariusz na szkoleniu opiera się na lekkim profilu Dockera (`light
 # Instalacja oprogramowania
 
 1. [Instalujemy GIT](#sekcja-git)
-2. [Narzędzia AI do szkolenia](#sekcja-ai-tools)
-3. [Instalujemy aktualną wersję LTS Node.js (obecnie 24)](#sekcja-node)
+2. [Instalujemy Visual Studio Code](#sekcja-vscode)
+3. [Narzędzia AI do szkolenia](#sekcja-ai-tools)
+4. [Instalujemy aktualną wersję LTS Node.js (obecnie 24)](#sekcja-node)
    - [MacOS](#macos)
    - [Windows](#windows)
-4. [Pobranie i instalacja testowanej aplikacji + środowiska](#sekcja-srodowisko)
-5. [Weryfikacja środowiska](#sekcja-weryfikacja)
-6. [Pobranie repozytorium z testami](#sekcja-testy)
+5. [Pobranie i instalacja testowanej aplikacji + środowiska](#sekcja-srodowisko)
+6. [Weryfikacja środowiska](#sekcja-weryfikacja)
+7. [Pobranie repozytorium z testami](#sekcja-testy)
 
 <a id="sekcja-git"></a>
 # 1. Instalujemy GIT
@@ -46,8 +47,19 @@ Jeśli nie czujecie się pewnie z instalacją przez terminal, w powyższej instr
 - macOS: [https://git-scm.com/download/mac](https://git-scm.com/download/mac)
 - Windows: [https://git-scm.com/download/win](https://git-scm.com/download/win)
 
+<a id="sekcja-vscode"></a>
+# 2. Instalujemy Visual Studio Code
+
+Na szkolenie zainstalujcie **Visual Studio Code (VS Code)** — edytor potrzebny do otwierania projektu, edytowania i zarządzania kodem testów Playwright.
+
+Pobierzcie instalator dla swojego systemu i zainstalujcie edytor:
+[Visual Studio Code — pobieranie](https://code.visualstudio.com/download)
+
+Po pobraniu repozytorium z testami otwórzcie w VS Code cały folder `playwright-2026` przez **File → Open Folder…** (Plik → Otwórz folder…).
+Wbudowany terminal (**Terminal → New Terminal**) pozwoli uruchamiać komendy i testy z dalszej części instrukcji.
+
 <a id="sekcja-ai-tools"></a>
-# 2. Narzędzia AI do szkolenia
+# 3. Narzędzia AI do szkolenia
 
 Możecie pracować na dowolnym narzędziu, którego używacie w pracy.
 Jeśli na co dzień korzystacie z GitHub Copilot, Windsurf, Claude Code albo innego asystenta, zostańcie przy swoim pracowym workflow.
@@ -102,7 +114,7 @@ Ważne: **inference nie jest darmowa**.
 Nawet gdy narzędzie ma plan Free albo jest open-source, zwykle i tak pojawiają się limity użycia i/lub koszt modeli (tokeny, kredyty, API).
 
 <a id="sekcja-node"></a>
-# 3. Instalujemy aktualną wersję LTS Node.js (obecnie 24)
+# 4. Instalujemy aktualną wersję LTS Node.js (obecnie 24)
 
 Potrzebne do pracy z kodem testów.
 
@@ -138,7 +150,7 @@ v24.x.x
 ```
 
 <a id="sekcja-srodowisko"></a>
-# 4. Pobranie i instalacja testowanej aplikacji + środowiska
+# 5. Pobranie i instalacja testowanej aplikacji + środowiska
 
 Środowisko oparte na Dockerze jest mocno preferowane, bo nie musicie przejmować się uruchamianiem poszczególnych aplikacji.
 W razie problemów możemy też zainstalować frontend i backend alternatywną drogą.
@@ -178,7 +190,7 @@ Szczegółowy opis lekkiego profilu, adresów oraz kroków weryfikacyjnych znajd
 - [awesome-localstack/docs/STUDENT_GUIDE.md](https://github.com/slawekradzyminski/awesome-localstack/blob/main/docs/STUDENT_GUIDE.md)
 
 <a id="sekcja-weryfikacja"></a>
-# 5. Weryfikacja środowiska
+# 6. Weryfikacja środowiska
 
 Po uruchomieniu sprawdźcie:
 
@@ -228,7 +240,7 @@ docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
 ```
 
 <a id="sekcja-testy"></a>
-# 6. Pobranie repozytorium z testami
+# 7. Pobranie repozytorium z testami
 
 ```bash
 git clone https://github.com/slawekradzyminski/playwright-2026
@@ -245,7 +257,7 @@ npx playwright test
 
 ![Wynik testow Playwright](images/pw_tests.png)
 
-Testy wymagają uruchomionego środowiska z punktu 4 i przechodzą przez główny adres aplikacji:
+Testy wymagają uruchomionego środowiska z punktu 5 i przechodzą przez główny adres aplikacji:
 
 - `http://localhost:8081`
 

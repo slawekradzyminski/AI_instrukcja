@@ -26,13 +26,14 @@ The default classroom scenario is based on the lightweight Docker profile, so th
 # Software Installation
 
 1. [Install Git](#git-section)
-2. [AI tools for the training](#ai-tools-section)
-3. [Install the current Node.js LTS version (currently 24)](#node-section)
+2. [Install Visual Studio Code](#vscode-section)
+3. [AI tools for the training](#ai-tools-section)
+4. [Install the current Node.js LTS version (currently 24)](#node-section)
    - [macOS](#macos)
    - [Windows](#windows)
-4. [Download and install the tested app + environment](#environment-section)
-5. [Verify the environment](#verification-section)
-6. [Download the test repository](#tests-section)
+5. [Download and install the tested app + environment](#environment-section)
+6. [Verify the environment](#verification-section)
+7. [Download the test repository](#tests-section)
 
 <a id="git-section"></a>
 # 1. Install Git
@@ -46,8 +47,19 @@ If you are not comfortable with terminal-based installation, the guide above als
 - macOS: [https://git-scm.com/download/mac](https://git-scm.com/download/mac)
 - Windows: [https://git-scm.com/download/win](https://git-scm.com/download/win)
 
+<a id="vscode-section"></a>
+# 2. Install Visual Studio Code
+
+Install **Visual Studio Code (VS Code)** before the training. We will use this editor to open the project, edit, and manage Playwright test code.
+
+Download the installer for your operating system and install the editor:
+[Download Visual Studio Code](https://code.visualstudio.com/download)
+
+After downloading the test repository, open the entire `playwright-2026` folder in VS Code using **File → Open Folder…**.
+Use the integrated terminal (**Terminal → New Terminal**) to run the commands and tests described later in this guide.
+
 <a id="ai-tools-section"></a>
-# 2. AI Tools for the Training
+# 3. AI Tools for the Training
 
 You can work with any tool you already use at work.
 If you normally use GitHub Copilot, Windsurf, Claude Code, or another assistant, stay with your existing workflow.
@@ -59,21 +71,21 @@ If you do not currently have access to any tool, these are all reasonable option
    - If you choose Copilot, I also recommend setting up the CLI:
      [https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-getting-started](https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-getting-started)
 
-2. **Cursor**
+3. **Cursor**
    - Product page and pricing: [https://cursor.com/pricing](https://cursor.com/pricing)
    - If you prefer terminal-based work, Cursor CLI is also a good option:
      [https://docs.cursor.com/tools/cli](https://docs.cursor.com/tools/cli)
 
-3. **Windsurf**
+4. **Windsurf**
    - Editor: [https://windsurf.com/windsurf](https://windsurf.com/windsurf)
 
-4. **Codex (OpenAI, app/IDE/CLI)**
+5. **Codex (OpenAI, app/IDE/CLI)**
    - Codex: [https://openai.com/codex/](https://openai.com/codex/)
    - Codex app: [https://openai.com/index/introducing-the-codex-app/](https://openai.com/index/introducing-the-codex-app/)
    - Codex CLI: [https://github.com/openai/codex](https://github.com/openai/codex)
    - ChatGPT pricing: [https://openai.com/chatgpt/pricing](https://openai.com/chatgpt/pricing)
 
-5. **Claude Code (Anthropic)**
+6. **Claude Code (Anthropic)**
    - Documentation: [https://docs.anthropic.com/en/docs/claude-code/overview](https://docs.anthropic.com/en/docs/claude-code/overview)
    - Cost management: [https://docs.anthropic.com/en/docs/claude-code/costs](https://docs.anthropic.com/en/docs/claude-code/costs)
    - Pricing: [https://claude.com/pricing](https://claude.com/pricing)
@@ -102,7 +114,7 @@ Important: **inference is not free**.
 Even when a tool has a free plan or is open source, there are usually still usage limits and/or model costs.
 
 <a id="node-section"></a>
-# 3. Install the Current Node.js LTS Version (Currently 24)
+# 4. Install the Current Node.js LTS Version (Currently 24)
 
 Node.js is required for the test code.
 
@@ -138,7 +150,7 @@ v24.x.x
 ```
 
 <a id="environment-section"></a>
-# 4. Download and Install the Tested App + Environment
+# 5. Download and Install the Tested App + Environment
 
 A Docker-based environment is strongly preferred because you do not need to worry about starting individual applications.
 If necessary, we can also install the frontend and backend in an alternative way.
@@ -178,7 +190,7 @@ For a more detailed lightweight-profile walkthrough, URLs, and verification step
 - [awesome-localstack/docs/STUDENT_GUIDE.md](https://github.com/slawekradzyminski/awesome-localstack/blob/main/docs/STUDENT_GUIDE.md)
 
 <a id="verification-section"></a>
-# 5. Verify the Environment
+# 6. Verify the Environment
 
 After startup, run:
 
@@ -228,7 +240,7 @@ docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
 ```
 
 <a id="tests-section"></a>
-# 6. Download the Test Repository
+# 7. Download the Test Repository
 
 ```bash
 git clone https://github.com/slawekradzyminski/playwright-2026
@@ -245,7 +257,7 @@ npx playwright test
 
 ![Playwright test results](images/pw_tests.png)
 
-The tests require the environment from section 4 and go through the main application URL:
+The tests require the environment from section 5 and go through the main application URL:
 
 - `http://localhost:8081`
 

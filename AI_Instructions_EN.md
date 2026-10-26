@@ -26,7 +26,7 @@ The default classroom scenario is based on the lightweight Docker profile, so th
 # Software Installation
 
 1. [Install Git](#git-section)
-2. [Install Visual Studio Code](#vscode-section)
+2. [Choose a Code Editor or IDE](#vscode-section)
 3. [AI tools for the training](#ai-tools-section)
 4. [Install the current Node.js LTS version (currently 24)](#node-section)
    - [macOS](#macos)
@@ -48,15 +48,20 @@ If you are not comfortable with terminal-based installation, the guide above als
 - Windows: [https://git-scm.com/download/win](https://git-scm.com/download/win)
 
 <a id="vscode-section"></a>
-# 2. Install Visual Studio Code
+# 2. Choose a Code Editor or IDE
 
-Install **Visual Studio Code (VS Code)** before the training. We will use this editor to open the project, edit, and manage Playwright test code.
+Prepare a code editor or IDE for opening the project, editing, and managing Playwright test code. You can use any tool that supports JavaScript and TypeScript, including the one you already use at work.
 
-Download the installer for your operating system and install the editor:
-[Download Visual Studio Code](https://code.visualstudio.com/download)
+The most popular choice is **Visual Studio Code (VS Code)** ([Stack Overflow Developer Survey](https://survey.stackoverflow.co/2025/)). If you do not have a preferred editor yet, I recommend starting with it.
 
-After downloading the test repository, open the entire `playwright-2026` folder in VS Code using **File → Open Folder…**.
-Use the integrated terminal (**Terminal → New Terminal**) to run the commands and tests described later in this guide.
+Download links — you only need one of these tools:
+
+- [Visual Studio Code](https://code.visualstudio.com/download)
+- [WebStorm (JetBrains)](https://www.jetbrains.com/webstorm/download/)
+- [Cursor](https://cursor.com/download)
+
+After downloading the test repository, open the entire `playwright-2026` folder in your chosen editor.
+In VS Code, use **File → Open Folder…**. The integrated terminal (**Terminal → New Terminal**) lets you run the commands and tests described later in this guide. In another IDE, use the equivalent options or a separate terminal.
 
 <a id="ai-tools-section"></a>
 # 3. AI Tools for the Training

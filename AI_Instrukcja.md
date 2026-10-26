@@ -26,7 +26,7 @@ Podstawowy scenariusz na szkoleniu opiera się na lekkim profilu Dockera (`light
 # Instalacja oprogramowania
 
 1. [Instalujemy GIT](#sekcja-git)
-2. [Instalujemy Visual Studio Code](#sekcja-vscode)
+2. [Wybieramy edytor kodu lub IDE](#sekcja-vscode)
 3. [Narzędzia AI do szkolenia](#sekcja-ai-tools)
 4. [Instalujemy aktualną wersję LTS Node.js (obecnie 24)](#sekcja-node)
    - [MacOS](#macos)
@@ -48,15 +48,20 @@ Jeśli nie czujecie się pewnie z instalacją przez terminal, w powyższej instr
 - Windows: [https://git-scm.com/download/win](https://git-scm.com/download/win)
 
 <a id="sekcja-vscode"></a>
-# 2. Instalujemy Visual Studio Code
+# 2. Wybieramy edytor kodu lub IDE
 
-Na szkolenie zainstalujcie **Visual Studio Code (VS Code)** — edytor potrzebny do otwierania projektu, edytowania i zarządzania kodem testów Playwright.
+Na szkolenie przygotujcie edytor kodu lub IDE do otwierania projektu, edytowania i zarządzania kodem testów Playwright. Możecie korzystać z dowolnego narzędzia obsługującego JavaScript i TypeScript, także tego, którego używacie już w pracy.
 
-Pobierzcie instalator dla swojego systemu i zainstalujcie edytor:
-[Visual Studio Code — pobieranie](https://code.visualstudio.com/download)
+Najpopularniejszym wyborem jest **Visual Studio Code (VS Code)** ([badanie Stack Overflow Developer Survey](https://survey.stackoverflow.co/2025/)). Jeśli nie macie jeszcze swojego ulubionego edytora, polecam zacząć od niego.
 
-Po pobraniu repozytorium z testami otwórzcie w VS Code cały folder `playwright-2026` przez **File → Open Folder…** (Plik → Otwórz folder…).
-Wbudowany terminal (**Terminal → New Terminal**) pozwoli uruchamiać komendy i testy z dalszej części instrukcji.
+Linki do pobrania — wystarczy jedno z tych narzędzi:
+
+- [Visual Studio Code](https://code.visualstudio.com/download)
+- [WebStorm (JetBrains)](https://www.jetbrains.com/webstorm/download/)
+- [Cursor](https://cursor.com/download)
+
+Po pobraniu repozytorium z testami otwórzcie w wybranym edytorze cały folder `playwright-2026`.
+W VS Code służy do tego **File → Open Folder…** (Plik → Otwórz folder…). Wbudowany terminal (**Terminal → New Terminal**) pozwoli uruchamiać komendy i testy z dalszej części instrukcji. W innym IDE użyjcie odpowiednich opcji lub osobnego terminala.
 
 <a id="sekcja-ai-tools"></a>
 # 3. Narzędzia AI do szkolenia

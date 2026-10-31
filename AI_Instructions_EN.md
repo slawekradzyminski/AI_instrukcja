@@ -66,57 +66,87 @@ In VS Code, use **File → Open Folder…**. The integrated terminal (**Terminal
 <a id="ai-tools-section"></a>
 # 3. AI Tools for the Training
 
-You can work with any tool you already use at work.
-If you normally use GitHub Copilot, Windsurf, Claude Code, or another assistant, stay with your existing workflow.
+One working AI tool is enough. If you already use a tool successfully at work, you can keep using it.
+If you are choosing your first tool, these are my recommendations for this workshop.
 
-If you do not currently have access to any tool, these are all reasonable options:
+Recommendations and prices checked on October 31, 2026. Prices below are in USD with monthly billing;
+taxes, regional prices, promotions, and limits may vary. Check the current pricing before purchasing.
+A subscription does not guarantee unlimited agent usage throughout the day.
 
-1. **GitHub Copilot**
-   - Quickstart: [https://docs.github.com/en/copilot/get-started/quickstart](https://docs.github.com/en/copilot/get-started/quickstart)
-   - If you choose Copilot, I also recommend setting up the CLI:
-     [https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-getting-started](https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-getting-started)
+## Recommended: Claude Code and Codex
 
-2. **Cursor**
-   - Product page and pricing: [https://cursor.com/pricing](https://cursor.com/pricing)
-   - If you prefer terminal-based work, Cursor CLI is also a good option:
-     [https://docs.cursor.com/tools/cli](https://docs.cursor.com/tools/cli)
+1. **Claude Code + Claude Pro — USD 20/month.**
+   This is my first choice for participants starting to work with an agent in this workshop.
+   Pro includes Claude Code; you do not need to purchase separate API access.
+   Usage limits apply and are shared with other Claude features.
+   - [Installation and first steps](https://code.claude.com/docs/en/quickstart)
+   - [Claude Pro pricing](https://claude.com/pricing)
 
-3. **Windsurf**
-   - Editor: [https://windsurf.com/windsurf](https://windsurf.com/windsurf)
+2. **Codex + ChatGPT Plus — USD 20/month.**
+   This is my second recommended option. You can work locally with Codex in the app, IDE, or terminal.
+   Sign in with your ChatGPT Plus account. A separate API key is not required;
+   API-key usage is billed separately from your subscription. Usage limits also apply.
+   - [Codex quickstart](https://developers.openai.com/codex/quickstart/)
+   - [Codex plans, pricing, and limits](https://developers.openai.com/codex/pricing/)
 
-4. **Codex (OpenAI, app/IDE/CLI)**
-   - Codex: [https://openai.com/codex/](https://openai.com/codex/)
-   - Codex app: [https://openai.com/index/introducing-the-codex-app/](https://openai.com/index/introducing-the-codex-app/)
-   - Codex CLI: [https://github.com/openai/codex](https://github.com/openai/codex)
-   - ChatGPT pricing: [https://openai.com/chatgpt/pricing](https://openai.com/chatgpt/pricing)
+These are my recommendations for the exercises, rather than a guarantee that one agent is best at every task.
+You do not need both subscriptions or a more expensive plan to get started.
 
-5. **Claude Code (Anthropic)**
-   - Documentation: [https://docs.anthropic.com/en/docs/claude-code/overview](https://docs.anthropic.com/en/docs/claude-code/overview)
-   - Cost management: [https://docs.anthropic.com/en/docs/claude-code/costs](https://docs.anthropic.com/en/docs/claude-code/costs)
-   - Pricing: [https://claude.com/pricing](https://claude.com/pricing)
+## Other options: Cursor and GitHub Copilot
 
-If you do not want to pay for Pro versions, reasonable CLI/open-source alternatives include:
-- Kilo Code: [https://kilocode.ai/](https://kilocode.ai/)
-- OpenCode: [https://opencode.ai/](https://opencode.ai/)
+Both tools are suitable for the workshop, especially if you already use them.
+Intensive agent use can become relatively expensive: model costs, credit consumption, and additional charges
+matter alongside the subscription fee. This is why I prefer the two tools above for beginners.
 
-Subscriptions backed by Chinese model providers are also suitable for this training.
-What matters most is whether the agent can work in a local repository, edit files, and run
-commands and tests. Current options include:
+- **Cursor** — an editor with an AI agent. Model availability and billing depend on the plan;
+  third-party model usage may be charged separately.
+  [Pricing and billing details](https://cursor.com/pricing).
+- **GitHub Copilot** — IDE integration and CLI. Pro starts at **USD 10/month**,
+  so the entry subscription costs less than the recommended plans.
+  Agent features consume GitHub AI Credits, and extra usage may require additional payment.
+  [Pricing](https://github.com/features/copilot/plans),
+  [quickstart](https://docs.github.com/en/copilot/get-started/quickstart).
 
-- **Qwen Code + Alibaba Cloud Coding Plan**:
-  [Qwen Code documentation](https://qwenlm.github.io/qwen-code-docs/en/)
-- **Kimi Code**:
-  [Kimi Code installation guide](https://www.kimi.com/code/docs/en/kimi-code-cli/guides/getting-started.html)
-- **GLM Coding Plan (Z.AI)**, supported by tools including Claude Code, OpenCode, Kilo Code, and Cline:
-  [official quick start](https://docs.z.ai/devpack/quick-start)
+## Budget options and Chinese model providers
+
+If cost is your priority, consider the options below.
+A lower subscription price does not imply identical quality, limits, or setup convenience.
+
+- **Qwen Code + Alibaba Cloud Model Studio Token Plan** — Token Plan Lite has a standard price
+  of **USD 8/month**, with a currently advertised promotional price of **USD 6/month**.
+  The offer is available in the Singapore region. This is separate from the old Coding Plan Lite,
+  which is no longer available for purchase.
+  [Current plan and pricing](https://www.alibabacloud.com/help/en/model-studio/token-plan-overview),
+  [Qwen Code authentication](https://qwenlm.github.io/qwen-code-docs/en/users/configuration/auth/).
+- **GLM Coding Plan (Z.AI)** — GLM models in a supported agent, such as Claude Code or OpenCode.
+  Standard Lite pricing starts at **USD 18/month**; promotions may reduce it.
+  Choosing GLM in Claude Code means using Z.AI's service, with its own limits and billing.
+  [Plan overview and limits](https://docs.z.ai/devpack/overview),
+  [setup](https://docs.z.ai/devpack/quick-start).
+- **Kimi Code (Moonshot AI)** — an alternative agent and Kimi models.
+  Before buying, check whether the selected plan includes Kimi Code:
+  current documentation requires **Plus or higher for new plans**; Go has no coding quota.
+  [Plan availability and limits](https://www.kimi.com/code/docs/en/kimi-code/membership.html),
+  [getting started](https://www.kimi.com/code/docs/en/kimi-code-cli/guides/getting-started.html).
+- **OpenCode** — an open-source agent client with your choice of provider and model;
+  the client itself does not provide free access to every model.
+  The optional **OpenCode Go costs USD 10/month** and provides selected models within usage limits.
+  **I generally do not recommend OpenCode as your first tool for the workshop**:
+  it requires additional model selection, provider setup, and understanding of billing.
+  It suits participants who want to experiment deliberately with configuration.
+  [OpenCode documentation](https://opencode.ai/docs/),
+  [OpenCode Go pricing and setup](https://opencode.ai/docs/go/).
+
+## Check your tool before the workshop
 
 The agent should run on the same computer as the application or be able to execute commands
-in your local terminal. An agent running only in a remote cloud environment usually cannot see
-your `http://localhost:8081` without additional configuration. Do not paste API keys into prompts,
-repository files, or logs shared with other people.
+in your local terminal. Before the workshop, check that it can open the repository, edit files,
+and run commands and tests. A browser chat alone is insufficient for these exercises.
+An agent running only in a remote cloud environment usually cannot see your `http://localhost:8081`
+without additional configuration. Do not paste API keys into prompts, repository files,
+or logs shared with other people.
 
-Important: **inference is not free**.
-Even when a tool has a free plan or is open source, there are usually still usage limits and/or model costs.
+Even when the client is open source or has a Free plan, model access may still be paid or limited.
 
 <a id="node-section"></a>
 # 4. Install the Current Node.js LTS Version (Currently 24)

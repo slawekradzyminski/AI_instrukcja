@@ -1,7 +1,7 @@
 # Przygotowanie środowiska do szkolenia z Playwright i AI
 
 Poniżej znajdziecie organizacyjne informacje oraz aktualną instrukcję przygotowania środowiska na szkolenie.
-Instrukcja została zweryfikowana 23 sierpnia 2026 r. z repozytorium `playwright-2026`
+Instrukcja została zweryfikowana 7 listopada 2026 r. z repozytorium `playwright-2026`
 i lekkim profilem `awesome-localstack` uruchomionym lokalnie.
 Proszę o sumienne przygotowanie. Jeśli pojawią się trudności techniczne, niczym się nie martwcie.
 Wszystkie problemy rozwiążemy wspólnie na szkoleniu.
@@ -10,6 +10,26 @@ Można też skontaktować się ze mną wcześniej mailowo:
 
 Zalecam pracę na komputerze prywatnym, ze względu na częste ograniczenia bezpieczeństwa na komputerach służbowych.
 Prywatny komputer z pełnymi uprawnieniami administratora daje większą elastyczność w rozwiązywaniu problemów.
+
+## W skrócie
+
+**Środowisko jest gotowe, gdy w folderze `playwright-2026` komenda `npx playwright test` kończy się wynikiem `11 passed`.**
+Wszystko poniżej prowadzi do tego jednego wyniku.
+
+- **Kiedy:** najpóźniej kilka dni przed szkoleniem. Pobieranie obrazów Dockera i przeglądarki to około 2,5 GB,
+  a ewentualne problemy (licencja Dockera, uprawnienia, proxy) łatwiej rozwiązać bez pośpiechu.
+- **Ile to trwa:** zwykle 30–60 minut, z agentem AI często krócej.
+- **Czego potrzebujecie:**
+  - macOS, Windows 10/11 (z WSL 2) albo Linux, najlepiej z uprawnieniami administratora;
+  - co najmniej 8 GB RAM w komputerze (16 GB zapewnia wygodną pracę), z czego Docker potrzebuje około 4 GB;
+  - około 5 GB wolnego miejsca na dysku;
+  - wolne porty `8081`, `8082` i `11434`.
+- **Docker Desktop albo Rancher Desktop:** oba działają. Jeśli w Waszej firmie Docker Desktop wymaga płatnej licencji,
+  wybierzcie Rancher Desktop ([sekcja 5](#sekcja-srodowisko)).
+- **Gdy Dockera nie da się uruchomić:** testy można puścić na wspólnym środowisku szkoleniowym
+  ([plan B](#sekcja-plan-b)). Lokalny Docker jest jednak zdecydowanie preferowany.
+- **Powtórka przed szkoleniem (opcjonalnie):** jeśli dawno nie programowaliście, przejrzyjcie
+  [podstawy JavaScript i TypeScript](typescript/README.md), a potem [powtórkę z Playwright](playwright/README.md).
 
 # Polecany sposób: setup z agentem AI
 
@@ -44,11 +64,16 @@ https://github.com/slawekradzyminski/AI_instrukcja/blob/master/AI_Instrukcja.md
 
 1. Sprawdź system operacyjny i co jest już zainstalowane: git, nvm, Node.js, Docker i Docker Compose.
 2. Doprowadź do stanu: Node.js 24 LTS (najlepiej przez nvm) oraz działający Docker z Docker Compose.
+   Jeśli Docker Desktop nie wchodzi w grę (np. licencja w firmie), użyj Rancher Desktop
+   z silnikiem dockerd (moby) i wyłączonym Kubernetesem, tak jak opisuje sekcja 5.
 3. W bieżącym folderze sklonuj awesome-localstack i playwright-2026, jeśli ich jeszcze nie ma.
 4. W awesome-localstack uruchom lekki profil
    (docker compose -f lightweight-docker-compose.yml up -d)
    i wykonaj wszystkie sprawdzenia z sekcji 6.
 5. W playwright-2026 uruchom: npm ci, npx playwright install chromium, npx playwright test.
+   Oczekiwany wynik: 11 passed.
+6. Jeśli lokalnego Dockera nie da się uruchomić, nie poddawaj się: przełącz testy na wspólne
+   środowisko według sekcji „Plan B” i uruchom je ponownie.
 
 Zasady:
 - Zanim coś zainstalujesz albo zmienisz ustawienia systemu, wyjaśnij, co chcesz zrobić, i poczekaj na moją zgodę.
@@ -112,9 +137,11 @@ Poniższe sekcje opisują te same kroki ręcznie i przydają się jako punkt odn
 4. [Instalujemy aktualną wersję LTS Node.js (obecnie 24)](#sekcja-node)
    - [MacOS](#macos)
    - [Windows](#windows)
-5. [Pobranie i instalacja testowanej aplikacji + środowiska](#sekcja-srodowisko)
+5. [Pobranie i instalacja testowanej aplikacji + środowiska (Docker Desktop lub Rancher Desktop)](#sekcja-srodowisko)
 6. [Weryfikacja środowiska](#sekcja-weryfikacja)
 7. [Pobranie repozytorium z testami](#sekcja-testy)
+
+Dodatkowo: [Plan B bez Dockera](#sekcja-plan-b) i [Najczęstsze problemy](#sekcja-problemy).
 
 <a id="sekcja-git"></a>
 # 1. Instalujemy GIT
@@ -268,14 +295,44 @@ v24.x.x
 <a id="sekcja-srodowisko"></a>
 # 5. Pobranie i instalacja testowanej aplikacji + środowiska
 
-Środowisko oparte na Dockerze jest mocno preferowane, bo nie musicie przejmować się uruchamianiem poszczególnych aplikacji.
-W razie problemów możemy też zainstalować frontend i backend alternatywną drogą.
+Aplikację uruchamiamy w kontenerach, więc nie musicie osobno instalować frontendu, backendu ani bazy.
+Potrzebny jest **Docker z Docker Compose**. Do wyboru macie dwie aplikacje — wystarczy jedna z nich.
 
-Instrukcja instalacji Dockera i Docker Compose:
-[https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+## Opcja A: Docker Desktop
 
-Alternatywą dla Docker Desktop może być Rancher Desktop:
-[https://docs.rancherdesktop.io/getting-started/installation/](https://docs.rancherdesktop.io/getting-started/installation/)
+[Instalacja Docker Desktop](https://docs.docker.com/get-started/get-docker/)
+
+Docker Desktop jest bezpłatny do użytku prywatnego, edukacyjnego i w małych firmach.
+W większych organizacjach (powyżej 250 pracowników lub 10 mln USD przychodu) wymaga płatnej subskrypcji
+([warunki licencji](https://docs.docker.com/subscription/desktop-license/)).
+Jeśli nie macie pewności, czy możecie go używać na komputerze służbowym, wybierzcie Rancher Desktop.
+
+## Opcja B: Rancher Desktop (darmowa alternatywa)
+
+[Instalacja Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop jest darmowy także w firmach. Żeby działał z naszymi komendami `docker compose`,
+po instalacji ustawcie w **Preferences**:
+
+1. **Container Engine → dockerd (moby)**. Przy silniku `containerd` komendy `docker` nie będą działać.
+2. **Kubernetes → odznaczcie „Enable Kubernetes”**. Na szkoleniu nie jest potrzebny, a zabiera pamięć.
+3. **Virtual Machine → Memory: co najmniej 4 GB** (macOS i Linux). Na Windows pamięcią zarządza WSL 2.
+
+Na Windows Rancher Desktop (podobnie jak Docker Desktop) korzysta z **WSL 2**; instalator pomoże go włączyć.
+Po zmianie ustawień poczekajcie, aż Rancher Desktop się uruchomi ponownie, i otwórzcie **nowy** terminal.
+
+## Sprawdzenie Dockera
+
+Niezależnie od wybranej opcji obie komendy muszą zwrócić wersję:
+
+```bash
+docker version
+docker compose version
+```
+
+Jeśli `docker` nie jest rozpoznawany, zajrzyjcie do sekcji [Najczęstsze problemy](#sekcja-problemy).
+
+## Uruchomienie aplikacji
 
 ```bash
 git clone https://github.com/slawekradzyminski/awesome-localstack
@@ -373,6 +430,8 @@ npx playwright test
 
 ![Wynik testow Playwright](images/pw_tests.png)
 
+Oczekiwany wynik to `11 passed`, jak na zrzucie powyżej.
+
 Testy wymagają uruchomionego środowiska z punktu 5 i przechodzą przez główny adres aplikacji:
 
 - `http://localhost:8081`
@@ -380,5 +439,45 @@ Testy wymagają uruchomionego środowiska z punktu 5 i przechodzą przez główn
 Aktualny endpoint logowania API używany w testach to:
 
 - `http://localhost:8081/api/v1/users/signin`
+
+Adres aplikacji jest ustawiony w pliku `.env` w repozytorium `playwright-2026`
+(`APP_BASE_URL=http://localhost:8081`).
+
+<a id="sekcja-plan-b"></a>
+# Plan B: gdy Dockera nie da się uruchomić
+
+Jeśli mimo prób lokalny Docker nie działa (np. blokady na komputerze służbowym), nie odpuszczajcie przygotowania.
+Testy można uruchomić na wspólnym środowisku szkoleniowym z tą samą aplikacją:
+
+1. W repozytorium `playwright-2026` otwórzcie plik `.env`.
+2. Zmieńcie adres na:
+
+   ```dotenv
+   APP_BASE_URL=https://aitesters.byst.re
+   ```
+
+3. Uruchomcie testy: `npx playwright test`. Oczekiwany wynik to także `11 passed`.
+
+To rozwiązanie awaryjne: środowisko jest współdzielone przez wszystkich uczestników, więc dane mogą się zmieniać,
+a niektóre ćwiczenia mogą wymagać lokalnego środowiska. Dajcie mi znać przed szkoleniem,
+że korzystacie z planu B, to wspólnie poszukamy rozwiązania.
+
+<a id="sekcja-problemy"></a>
+# Najczęstsze problemy
+
+- **`docker: command not found` po instalacji Rancher Desktop** — sprawdźcie, czy w Preferences → Container Engine
+  wybrany jest **dockerd (moby)**, a potem otwórzcie nowy terminal (lub uruchomcie komputer ponownie).
+- **Port jest zajęty (`port is already allocated`)** — na `8081`, `8082` lub `11434` działa już inna aplikacja.
+  Najczęściej to lokalnie zainstalowana **Ollama** (port `11434`) albo inny projekt w Dockerze.
+  Zatrzymajcie ją na czas szkolenia lub sprawdźcie, co zajmuje port:
+  `lsof -i :11434` (macOS/Linux) albo `netstat -ano | findstr 11434` (Windows).
+- **Obrazy się nie pobierają (timeout, błąd certyfikatu)** — często to firmowy VPN lub proxy.
+  Spróbujcie poza VPN-em albo na prywatnej sieci.
+- **Kontener się restartuje albo backend długo startuje** — dajcie Dockerowi więcej pamięci (co najmniej 4 GB)
+  i sprawdźcie logi: `docker compose -f lightweight-docker-compose.yml logs -f backend gateway`.
+- **`npx playwright install chromium` kończy się błędem** — zwykle to również proxy; spróbujcie innej sieci.
+- **Windows: `curl` zachowuje się inaczej** — w PowerShellu używajcie `curl.exe` zamiast `curl`.
+- **Testy nie przechodzą** — sprawdźcie, czy aplikacja działa pod `http://localhost:8081/login`
+  i czy w pliku `.env` jest właściwy adres.
 
 W razie kłopotów zachęcam do kontaktu.

@@ -465,6 +465,12 @@ a niektóre ćwiczenia mogą wymagać lokalnego środowiska. Dajcie mi znać prz
 <a id="sekcja-problemy"></a>
 # Najczęstsze problemy
 
+**Pierwszy krok przy każdym problemie: wklejcie komunikat błędu do agenta AI i poproście go o rozwiązanie.**
+Najlepiej razem z komendą, którą uruchomiliście, i informacją o systemie. Szkolenie jest o pracy z AI,
+więc to już się liczy jako rozgrzewka 😏
+
+Jeśli agent też się poddał, poniżej znajdziecie najczęstsze przyczyny:
+
 - **`docker: command not found` po instalacji Rancher Desktop** — sprawdźcie, czy w Preferences → Container Engine
   wybrany jest **dockerd (moby)**, a potem otwórzcie nowy terminal (lub uruchomcie komputer ponownie).
 - **Port jest zajęty (`port is already allocated`)** — na `8081`, `8082` lub `11434` działa już inna aplikacja.
@@ -480,4 +486,4 @@ a niektóre ćwiczenia mogą wymagać lokalnego środowiska. Dajcie mi znać prz
 - **Testy nie przechodzą** — sprawdźcie, czy aplikacja działa pod `http://localhost:8081/login`
   i czy w pliku `.env` jest właściwy adres.
 
-W razie kłopotów zachęcam do kontaktu.
+W razie kłopotów najpierw zapytajcie agenta 😏, a jeśli to nie pomoże, zachęcam do kontaktu.

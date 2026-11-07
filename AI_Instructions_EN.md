@@ -465,6 +465,12 @@ that you are using plan B, and we will look for a solution together.
 <a id="problems-section"></a>
 # Common Problems
 
+**First step for any problem: paste the error message into your AI agent and ask it to fix it.**
+Ideally include the command you ran and your operating system. The training is about working with AI,
+so this already counts as a warm-up 😏
+
+If the agent gives up too, here are the most common causes:
+
 - **`docker: command not found` after installing Rancher Desktop** — check that Preferences → Container Engine
   is set to **dockerd (moby)**, then open a new terminal (or restart the computer).
 - **A port is already in use (`port is already allocated`)** — another application already uses `8081`, `8082` or `11434`.
@@ -480,4 +486,4 @@ that you are using plan B, and we will look for a solution together.
 - **Tests fail** — check that the application works at `http://localhost:8081/login`
   and that the `.env` file has the right URL.
 
-If you have any trouble, feel free to contact me.
+If you have any trouble, ask your agent first 😏, and if that does not help, feel free to contact me.

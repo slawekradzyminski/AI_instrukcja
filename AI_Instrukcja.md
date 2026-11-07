@@ -23,7 +23,19 @@ Jak to zrobić:
    Agent musi działać lokalnie i mieć dostęp do terminala; sam czat w przeglądarce nie wystarczy.
 2. Utwórzcie pusty folder na projekty szkoleniowe, otwórzcie w nim terminal i uruchomcie agenta.
 3. Włączcie w agencie tryb automatycznego zatwierdzania (szczegóły poniżej), żeby nie klikać zgody przy każdej komendzie.
-4. Wklejcie poniższy prompt. Resztę (sekcje 4–7) agent zrobi z Wami krok po kroku.
+4. Wklejcie jeden z poniższych promptów. Resztę (sekcje 4–7) agent zrobi z Wami krok po kroku.
+
+**Wersja dla leniwych:** wystarczy dać agentowi link do tej instrukcji i jedno zdanie:
+
+```text
+Przygotuj mój komputer do szkolenia według tej instrukcji i na końcu powiedz, czy wszystko działa:
+https://github.com/slawekradzyminski/AI_instrukcja/blob/master/AI_Instrukcja.md
+```
+
+Jeśli Wasz agent nie ma dostępu do internetu, skopiujcie całą treść tej instrukcji, wklejcie ją do agenta
+i dopiszcie: „Zrób ten setup na moim komputerze i na końcu powiedz, czy wszystko działa”.
+
+**Wersja dokładniejsza** — prompt, który prowadzi agenta krok po kroku i kończy się tabelą wyników:
 
 ```text
 Pomóż mi przygotować komputer do szkolenia z Playwright i AI.

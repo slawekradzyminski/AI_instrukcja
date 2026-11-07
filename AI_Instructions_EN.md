@@ -23,7 +23,19 @@ How to do it:
    The agent must run locally with terminal access; a chat in the browser is not enough.
 2. Create an empty folder for the training projects, open a terminal there and start the agent.
 3. Turn on the agent's auto-approve mode (details below) so you don't have to approve every command.
-4. Paste the prompt below. The agent will guide you through the rest (sections 4–7) step by step.
+4. Paste one of the prompts below. The agent will guide you through the rest (sections 4–7) step by step.
+
+**The lazy version:** just give the agent a link to this guide and one sentence:
+
+```text
+Set up my computer for the training following this guide, and tell me at the end whether everything works:
+https://github.com/slawekradzyminski/AI_instrukcja/blob/master/AI_Instructions_EN.md
+```
+
+If your agent has no internet access, copy the whole guide, paste it into the agent
+and add: "Do this setup on my computer and tell me at the end whether everything works."
+
+**The more thorough version** — a prompt that walks the agent through each step and ends with a results table:
 
 ```text
 Help me prepare my computer for the Playwright and AI training.

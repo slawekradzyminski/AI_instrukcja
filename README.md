@@ -2,6 +2,10 @@
 
 Instrukcje przygotowania środowiska do szkolenia z testowania:
 
+> **Polecam zrobić setup z agentem AI.** Gotowy prompt znajdziecie na początku instrukcji.
+>
+> **Recommended: set up with an AI agent.** A ready-to-paste prompt is at the top of each guide.
+
 - [Instrukcja po polsku](AI_Instrukcja.md)
 - [Instructions in English](AI_Instructions_EN.md)
 - [Powtórka z Playwright przed szkoleniem](playwright/README.md)

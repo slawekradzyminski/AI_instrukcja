@@ -11,6 +11,51 @@ You can also contact me earlier by email:
 I recommend working on a personal computer because corporate machines often have security restrictions.
 A personal computer with full administrator privileges gives more flexibility when solving problems.
 
+# Recommended: Set Up with an AI Agent
+
+**I encourage you to do the whole setup with an AI agent** (for example Claude Code, Codex, Copilot CLI or Cursor).
+It is the fastest route and a good warm-up for the training, where we will work with agents anyway.
+The agent checks what you already have, runs the commands, reads the logs and proposes fixes when something fails.
+
+How to do it:
+
+1. Install **Git** ([section 1](#git-section)), an **editor** ([section 2](#vscode-section)) and an **AI agent** ([section 3](#ai-tools-section)) yourself.
+   The agent must run locally with terminal access; a chat in the browser is not enough.
+2. Create an empty folder for the training projects, open a terminal there and start the agent.
+3. Paste the prompt below. The agent will guide you through the rest (sections 4–7) step by step.
+
+```text
+Help me prepare my computer for the Playwright and AI training.
+Follow this guide (sections 4–7):
+https://github.com/slawekradzyminski/AI_instrukcja/blob/master/AI_Instructions_EN.md
+
+1. Check my operating system and what is already installed: git, nvm, Node.js, Docker and Docker Compose.
+2. Get to this state: Node.js 24 LTS (preferably via nvm) and a working Docker with Docker Compose.
+3. In the current folder, clone awesome-localstack and playwright-2026 if they are not there yet.
+4. In awesome-localstack, start the lightweight profile
+   (docker compose -f lightweight-docker-compose.yml up -d)
+   and run every check from section 6.
+5. In playwright-2026, run: npm ci, npx playwright install chromium, npx playwright test.
+
+Rules:
+- Before installing anything or changing system settings, explain what you want to do and wait for my approval.
+- If a step needs administrator rights or a graphical installer (e.g. Docker Desktop),
+  give me exact instructions and wait until I have done it.
+- Never ask me for passwords or API keys in the chat.
+- When something fails, read the logs, find the cause and propose a fix.
+- Finish with a table: step, result (OK / problem), tool versions and the Playwright test result.
+```
+
+A few safety rules:
+
+- Read the commands the agent wants to run and approve them consciously.
+- Type an administrator password only into the operating system or installer prompt, never into the agent chat.
+- If the agent gets stuck or something is unclear, the manual guide below describes the same steps.
+  You can also bring the result to the training and we will solve it together.
+
+The agent's summary (the table from the last point of the prompt) is the best proof that your environment is ready.
+Keep it in case questions come up during the training.
+
 # General Training Approach
 
 In addition to theory, during the training we will work on this project:
@@ -23,7 +68,10 @@ This is the application environment we will use during the course:
 
 The default classroom scenario is based on the lightweight Docker profile, so this is the profile you should start and verify before the course.
 
-# Software Installation
+# Software Installation (Manual Guide)
+
+If you set up with an AI agent, you do steps 1–3 yourself and the agent guides you through steps 4–7.
+The sections below describe the same steps manually and serve as a reference.
 
 1. [Install Git](#git-section)
 2. [Choose a Code Editor or IDE](#vscode-section)

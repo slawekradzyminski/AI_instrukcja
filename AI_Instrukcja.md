@@ -11,6 +11,51 @@ Można też skontaktować się ze mną wcześniej mailowo:
 Zalecam pracę na komputerze prywatnym, ze względu na częste ograniczenia bezpieczeństwa na komputerach służbowych.
 Prywatny komputer z pełnymi uprawnieniami administratora daje większą elastyczność w rozwiązywaniu problemów.
 
+# Polecany sposób: setup z agentem AI
+
+**Zachęcam, żeby całą konfigurację zrobić z pomocą agenta AI** (np. Claude Code, Codex, Copilot CLI lub Cursor).
+To najszybsza droga, a przy okazji dobra rozgrzewka przed szkoleniem, na którym i tak będziemy pracować z agentami.
+Agent sam sprawdzi, co macie już zainstalowane, uruchomi komendy, przeczyta logi i zaproponuje poprawki, gdy coś nie zadziała.
+
+Jak to zrobić:
+
+1. Ręcznie zainstalujcie **Git** ([sekcja 1](#sekcja-git)), **edytor** ([sekcja 2](#sekcja-vscode)) i **agenta AI** ([sekcja 3](#sekcja-ai-tools)).
+   Agent musi działać lokalnie i mieć dostęp do terminala; sam czat w przeglądarce nie wystarczy.
+2. Utwórzcie pusty folder na projekty szkoleniowe, otwórzcie w nim terminal i uruchomcie agenta.
+3. Wklejcie poniższy prompt. Resztę (sekcje 4–7) agent zrobi z Wami krok po kroku.
+
+```text
+Pomóż mi przygotować komputer do szkolenia z Playwright i AI.
+Postępuj zgodnie z instrukcją (sekcje 4–7):
+https://github.com/slawekradzyminski/AI_instrukcja/blob/master/AI_Instrukcja.md
+
+1. Sprawdź system operacyjny i co jest już zainstalowane: git, nvm, Node.js, Docker i Docker Compose.
+2. Doprowadź do stanu: Node.js 24 LTS (najlepiej przez nvm) oraz działający Docker z Docker Compose.
+3. W bieżącym folderze sklonuj awesome-localstack i playwright-2026, jeśli ich jeszcze nie ma.
+4. W awesome-localstack uruchom lekki profil
+   (docker compose -f lightweight-docker-compose.yml up -d)
+   i wykonaj wszystkie sprawdzenia z sekcji 6.
+5. W playwright-2026 uruchom: npm ci, npx playwright install chromium, npx playwright test.
+
+Zasady:
+- Zanim coś zainstalujesz albo zmienisz ustawienia systemu, wyjaśnij, co chcesz zrobić, i poczekaj na moją zgodę.
+- Jeśli krok wymaga uprawnień administratora lub graficznego instalatora (np. Docker Desktop),
+  podaj mi dokładne instrukcje i poczekaj, aż to zrobię.
+- Nie proś mnie o hasła ani klucze API w czacie.
+- Gdy coś nie działa, przeczytaj logi, znajdź przyczynę i zaproponuj poprawkę.
+- Na końcu pokaż tabelę: krok, wynik (OK / problem), wersje narzędzi i wynik testów Playwright.
+```
+
+Kilka zasad bezpieczeństwa:
+
+- Czytajcie komendy, które agent chce uruchomić, i zatwierdzajcie je świadomie.
+- Hasło administratora wpisujcie tylko w okienku systemu lub instalatora, nigdy w czacie z agentem.
+- Jeśli agent utknie albo coś jest niejasne, poniższa instrukcja ręczna opisuje te same kroki.
+  Możecie też po prostu przynieść wynik na szkolenie, rozwiążemy to wspólnie.
+
+Podsumowanie od agenta (tabela z ostatniego punktu promptu) to najlepszy dowód, że środowisko jest gotowe.
+Warto je zachować na wypadek pytań na szkoleniu.
+
 # Ogólne podejście do szkolenia
 
 Poza teorią podczas szkolenia będziemy pracować na projekcie:
@@ -23,7 +68,10 @@ Tutaj jest środowisko aplikacyjne, na którym będziemy pracować:
 
 Podstawowy scenariusz na szkoleniu opiera się na lekkim profilu Dockera (`lightweight`), więc to właśnie ten profil warto uruchomić i sprawdzić przed zajęciami.
 
-# Instalacja oprogramowania
+# Instalacja oprogramowania (instrukcja ręczna)
+
+Jeśli robicie setup z agentem AI, kroki 1–3 wykonujecie sami, a kroki 4–7 przeprowadzi Was agent.
+Poniższe sekcje opisują te same kroki ręcznie i przydają się jako punkt odniesienia.
 
 1. [Instalujemy GIT](#sekcja-git)
 2. [Wybieramy edytor kodu lub IDE](#sekcja-vscode)

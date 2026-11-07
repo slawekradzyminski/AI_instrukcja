@@ -22,7 +22,8 @@ How to do it:
 1. Install **Git** ([section 1](#git-section)), an **editor** ([section 2](#vscode-section)) and an **AI agent** ([section 3](#ai-tools-section)) yourself.
    The agent must run locally with terminal access; a chat in the browser is not enough.
 2. Create an empty folder for the training projects, open a terminal there and start the agent.
-3. Paste the prompt below. The agent will guide you through the rest (sections 4–7) step by step.
+3. Turn on the agent's auto-approve mode (details below) so you don't have to approve every command.
+4. Paste the prompt below. The agent will guide you through the rest (sections 4–7) step by step.
 
 ```text
 Help me prepare my computer for the Playwright and AI training.
@@ -46,10 +47,30 @@ Rules:
 - Finish with a table: step, result (OK / problem), tool versions and the Playwright test result.
 ```
 
-A few safety rules:
+## Recommended: Auto-Approve Mode
 
-- Read the commands the agent wants to run and approve them consciously.
+The setup involves dozens of commands. Approving each one by hand quickly gets tedious and adds little,
+so **I recommend turning on auto-approve**. Ideally use a mode in which a separate model or classifier checks
+every action: safe commands run straight away, while risky ones are blocked or come back to you.
+
+- **Claude Code — auto mode.** Press `Shift+Tab` until the status line shows *auto mode*.
+  Availability depends on your plan and version; if the mode is not listed, check the docs.
+  [Permission modes](https://code.claude.com/docs/en/permission-modes)
+- **Codex — Auto-review.** Choose Auto-review in the approval settings of the app or IDE.
+  In the CLI, set `approval_policy = "on-request"` and `approvals_reviewer = "auto_review"` in `~/.codex/config.toml`.
+  [Auto-review](https://developers.openai.com/codex/concepts/sandboxing/auto-review)
+- **Cursor — Auto-review.** This is the default run mode; find it under Cursor Settings → Agents → Approvals & Execution.
+  [Run Modes](https://cursor.com/docs/agent/security/run-modes)
+- **GitHub Copilot CLI — autopilot with `/allow-all`.** Press `Shift+Tab` until *Autopilot* is shown and grant all permissions
+  (or type `/allow-all`). There is no separate reviewer here, so use this mode only on your own computer
+  and in the training folder. [Autopilot](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/autopilot)
+
+A few safety rules, also in auto mode:
+
+- Keep an eye on what the agent does, especially when it installs software or changes things outside the training folder.
 - Type an administrator password only into the operating system or installer prompt, never into the agent chat.
+- Avoid modes with no checks at all (e.g. *Full access* in Codex, *Run Everything* in Cursor),
+  especially on a work computer.
 - If the agent gets stuck or something is unclear, the manual guide below describes the same steps.
   You can also bring the result to the training and we will solve it together.
 

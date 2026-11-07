@@ -22,7 +22,8 @@ Jak to zrobić:
 1. Ręcznie zainstalujcie **Git** ([sekcja 1](#sekcja-git)), **edytor** ([sekcja 2](#sekcja-vscode)) i **agenta AI** ([sekcja 3](#sekcja-ai-tools)).
    Agent musi działać lokalnie i mieć dostęp do terminala; sam czat w przeglądarce nie wystarczy.
 2. Utwórzcie pusty folder na projekty szkoleniowe, otwórzcie w nim terminal i uruchomcie agenta.
-3. Wklejcie poniższy prompt. Resztę (sekcje 4–7) agent zrobi z Wami krok po kroku.
+3. Włączcie w agencie tryb automatycznego zatwierdzania (szczegóły poniżej), żeby nie klikać zgody przy każdej komendzie.
+4. Wklejcie poniższy prompt. Resztę (sekcje 4–7) agent zrobi z Wami krok po kroku.
 
 ```text
 Pomóż mi przygotować komputer do szkolenia z Playwright i AI.
@@ -46,10 +47,30 @@ Zasady:
 - Na końcu pokaż tabelę: krok, wynik (OK / problem), wersje narzędzi i wynik testów Playwright.
 ```
 
-Kilka zasad bezpieczeństwa:
+## Polecam tryb automatycznego zatwierdzania
 
-- Czytajcie komendy, które agent chce uruchomić, i zatwierdzajcie je świadomie.
+Setup to kilkadziesiąt komend. Ręczne zatwierdzanie każdej z nich szybko się nudzi i niewiele daje,
+dlatego **polecam włączyć tryb auto-approve**. Najlepiej taki, w którym każdą akcję sprawdza osobny
+model lub klasyfikator: bezpieczne komendy przechodzą od razu, a ryzykowne są blokowane albo wracają do Was.
+
+- **Claude Code — auto mode.** Przełączcie tryb skrótem `Shift+Tab`, aż na pasku statusu pojawi się *auto mode*.
+  Dostępność zależy od planu i wersji; jeśli trybu nie ma na liście, sprawdźcie dokumentację.
+  [Tryby uprawnień](https://code.claude.com/docs/en/permission-modes)
+- **Codex — Auto-review.** Wybierzcie Auto-review w ustawieniach zatwierdzania aplikacji lub IDE.
+  W CLI ustawcie w `~/.codex/config.toml`: `approval_policy = "on-request"` i `approvals_reviewer = "auto_review"`.
+  [Auto-review](https://developers.openai.com/codex/concepts/sandboxing/auto-review)
+- **Cursor — Auto-review.** To domyślny tryb uruchamiania; znajdziecie go w Cursor Settings → Agents → Approvals & Execution.
+  [Run Modes](https://cursor.com/docs/agent/security/run-modes)
+- **GitHub Copilot CLI — autopilot z `/allow-all`.** Przełączcie `Shift+Tab` na *Autopilot* i zgódźcie się na wszystkie uprawnienia
+  (lub wpiszcie `/allow-all`). Tu nie ma osobnego recenzenta, więc używajcie tego trybu tylko na własnym komputerze
+  i w folderze szkoleniowym. [Autopilot](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/autopilot)
+
+Kilka zasad bezpieczeństwa, także w trybie automatycznym:
+
+- Rzućcie okiem na to, co agent robi, zwłaszcza przy instalacji programów i zmianach poza folderem szkoleniowym.
 - Hasło administratora wpisujcie tylko w okienku systemu lub instalatora, nigdy w czacie z agentem.
+- Unikajcie trybów bez żadnej kontroli (np. *Full access* w Codexie, *Run Everything* w Cursorze),
+  zwłaszcza na komputerze służbowym.
 - Jeśli agent utknie albo coś jest niejasne, poniższa instrukcja ręczna opisuje te same kroki.
   Możecie też po prostu przynieść wynik na szkolenie, rozwiążemy to wspólnie.
 

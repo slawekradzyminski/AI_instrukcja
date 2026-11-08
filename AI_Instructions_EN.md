@@ -353,6 +353,7 @@ Behind this gateway you have:
 
 - frontend
 - backend API under `/api/v1/...`
+- warehouse API (shipments, returns, purchasing) served by `warehouse-service`
 - Swagger UI
 - product images under `/images/...`
 - mock LLM on a separate port `11434`
@@ -372,6 +373,7 @@ docker compose -f lightweight-docker-compose.yml ps
 curl -i http://localhost:8081/login
 curl -i http://localhost:8081/v3/api-docs
 curl -i http://localhost:8081/images/iphone.png
+curl -i http://localhost:8081/warehouse/v3/api-docs
 curl -i http://localhost:8082/realms/awesome-testing/.well-known/openid-configuration
 curl -i -X POST http://localhost:11434/api/generate \
   -H 'Content-Type: application/json' \
@@ -380,9 +382,9 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Expected result:
 
-- the `backend`, `frontend`, `gateway`, `keycloak`, and `ollama-mock` services are in the `Up` state
+- the `backend`, `frontend`, `gateway`, `keycloak`, `ollama-mock`, `postgres` and `warehouse-service` services are in the `Up` state
 - the login page returns `200`
-- OpenAPI returns `200`
+- OpenAPI returns `200` (backend and warehouse)
 - the product image returns `200`
 - the Keycloak OpenID Connect configuration returns `200`
 - the mock LLM returns `200`
@@ -400,6 +402,7 @@ Local credentials:
 
 - standard app login: `client` / `client`
 - standard administrator account: `admin` / `LocalDemoAdmin123!`
+- warehouse account (shipments, returns, purchasing): `warehouse` / `warehouse`
 - SSO through Keycloak: `sso-client` / `SsoClient123!`
 - Social login (Google mock): `google-user` / `GoogleUser123!`
 - Social login (GitHub mock): `github-user` / `GitHubUser123!`
@@ -410,6 +413,7 @@ If something is still starting, check logs first:
 ```bash
 docker compose -f lightweight-docker-compose.yml logs -f backend gateway
 docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
+docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service
 ```
 
 <a id="tests-section"></a>

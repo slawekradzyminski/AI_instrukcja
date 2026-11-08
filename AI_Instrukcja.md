@@ -353,9 +353,10 @@ Za tą bramką dostępne są:
 
 - frontend
 - backend API pod `/api/v1/...`
+- API magazynu (wysyłki, zwroty, zamówienia u dostawców) obsługiwane przez `warehouse-service`
 - Swagger UI
 - obrazy produktów pod `/images/...`
-- mock LLM pod osobnym porcie `11434`
+- mock LLM pod osobnym portem `11434`
 - Keycloak / SSO pod osobnym portem `8082`
 
 Szczegółowy opis lekkiego profilu, adresów oraz kroków weryfikacyjnych znajdziecie tutaj:
@@ -372,6 +373,7 @@ docker compose -f lightweight-docker-compose.yml ps
 curl -i http://localhost:8081/login
 curl -i http://localhost:8081/v3/api-docs
 curl -i http://localhost:8081/images/iphone.png
+curl -i http://localhost:8081/warehouse/v3/api-docs
 curl -i http://localhost:8082/realms/awesome-testing/.well-known/openid-configuration
 curl -i -X POST http://localhost:11434/api/generate \
   -H 'Content-Type: application/json' \
@@ -380,9 +382,9 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Oczekiwany rezultat:
 
-- serwisy `backend`, `frontend`, `gateway`, `keycloak` i `ollama-mock` są w stanie `Up`
+- serwisy `backend`, `frontend`, `gateway`, `keycloak`, `ollama-mock`, `postgres` i `warehouse-service` są w stanie `Up`
 - strona logowania odpowiada `200`
-- OpenAPI odpowiada `200`
+- OpenAPI odpowiada `200` (backend i magazyn)
 - obrazek produktu odpowiada `200`
 - konfiguracja OpenID Connect w Keycloak odpowiada `200`
 - mock LLM odpowiada `200`
@@ -400,6 +402,7 @@ Lokalne dane logowania:
 
 - klasyczne logowanie w aplikacji: `client` / `client`
 - klasyczne konto administratora: `admin` / `LocalDemoAdmin123!`
+- konto magazynu (wysyłki, zwroty, zamówienia u dostawców): `warehouse` / `warehouse`
 - SSO przez Keycloak: `sso-client` / `SsoClient123!`
 - Social login (Google mock): `google-user` / `GoogleUser123!`
 - Social login (GitHub mock): `github-user` / `GitHubUser123!`
@@ -410,6 +413,7 @@ Jeśli coś jeszcze się uruchamia, najpierw sprawdźcie logi:
 ```bash
 docker compose -f lightweight-docker-compose.yml logs -f backend gateway
 docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
+docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service
 ```
 
 <a id="sekcja-testy"></a>

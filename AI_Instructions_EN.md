@@ -1,7 +1,7 @@
 # Playwright and AI Training Environment Setup
 
 Below you will find organizational information and the current environment setup guide for the training.
-This guide was verified on November 7, 2026 with the `playwright-2026` repository
+This guide was verified on November 9, 2026 with the `playwright-2026` repository
 and the lightweight `awesome-localstack` profile running locally.
 Please prepare carefully. If you run into technical issues, do not worry.
 We will solve all problems together during the training.
@@ -16,12 +16,12 @@ A personal computer with full administrator privileges gives more flexibility wh
 **Your environment is ready when `npx playwright test` in the `playwright-2026` folder ends with `11 passed`.**
 Everything below leads to that one result.
 
-- **When:** at least a few days before the training. Docker images and the browser are about 2.5 GB to download,
+- **When:** at least a few days before the training. Docker images and the browser are about 1.2 GB to download,
   and possible issues (Docker licence, permissions, proxy) are easier to solve without time pressure.
 - **How long:** usually 30–60 minutes, often less with an AI agent.
 - **What you need:**
   - macOS, Windows 10/11 (with WSL 2) or Linux, ideally with administrator rights;
-  - at least 8 GB of RAM in the computer (16 GB is comfortable), of which Docker needs about 4 GB;
+  - at least 8 GB of RAM in the computer (16 GB is comfortable), of which you should give Docker about 4 GB (the training stack itself uses about 1.5 GB);
   - about 5 GB of free disk space;
   - free ports `8081`, `8082` and `11434`.
 - **Docker Desktop or Rancher Desktop:** both work. If Docker Desktop requires a paid licence at your company,
@@ -483,7 +483,7 @@ If the agent gives up too, here are the most common causes:
   `lsof -i :11434` (macOS/Linux) or `netstat -ano | findstr 11434` (Windows).
 - **Images do not download (timeout, certificate error)** — this is often a company VPN or proxy.
   Try without the VPN or on a private network.
-- **A container keeps restarting or the backend starts slowly** — give Docker more memory (at least 4 GB)
+- **A container keeps restarting or a service never becomes ready** — give Docker more memory (at least 4 GB)
   and check the logs: `docker compose -f lightweight-docker-compose.yml logs -f backend gateway`.
 - **`npx playwright install chromium` fails** — usually a proxy as well; try another network.
 - **Windows: `curl` behaves differently** — in PowerShell, use `curl.exe` instead of `curl`.

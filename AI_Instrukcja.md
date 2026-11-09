@@ -1,7 +1,7 @@
 # Przygotowanie środowiska do szkolenia z Playwright i AI
 
 Poniżej znajdziecie organizacyjne informacje oraz aktualną instrukcję przygotowania środowiska na szkolenie.
-Instrukcja została zweryfikowana 7 listopada 2026 r. z repozytorium `playwright-2026`
+Instrukcja została zweryfikowana 9 listopada 2026 r. z repozytorium `playwright-2026`
 i lekkim profilem `awesome-localstack` uruchomionym lokalnie.
 Proszę o sumienne przygotowanie. Jeśli pojawią się trudności techniczne, niczym się nie martwcie.
 Wszystkie problemy rozwiążemy wspólnie na szkoleniu.
@@ -16,12 +16,12 @@ Prywatny komputer z pełnymi uprawnieniami administratora daje większą elastyc
 **Środowisko jest gotowe, gdy w folderze `playwright-2026` komenda `npx playwright test` kończy się wynikiem `11 passed`.**
 Wszystko poniżej prowadzi do tego jednego wyniku.
 
-- **Kiedy:** najpóźniej kilka dni przed szkoleniem. Pobieranie obrazów Dockera i przeglądarki to około 2,5 GB,
+- **Kiedy:** najpóźniej kilka dni przed szkoleniem. Pobieranie obrazów Dockera i przeglądarki to około 1,2 GB,
   a ewentualne problemy (licencja Dockera, uprawnienia, proxy) łatwiej rozwiązać bez pośpiechu.
 - **Ile to trwa:** zwykle 30–60 minut, z agentem AI często krócej.
 - **Czego potrzebujecie:**
   - macOS, Windows 10/11 (z WSL 2) albo Linux, najlepiej z uprawnieniami administratora;
-  - co najmniej 8 GB RAM w komputerze (16 GB zapewnia wygodną pracę), z czego Docker potrzebuje około 4 GB;
+  - co najmniej 8 GB RAM w komputerze (16 GB zapewnia wygodną pracę), z czego warto dać Dockerowi około 4 GB (samo środowisko szkoleniowe zajmuje około 1,5 GB);
   - około 5 GB wolnego miejsca na dysku;
   - wolne porty `8081`, `8082` i `11434`.
 - **Docker Desktop albo Rancher Desktop:** oba działają. Jeśli w Waszej firmie Docker Desktop wymaga płatnej licencji,
@@ -483,7 +483,7 @@ Jeśli agent też się poddał, poniżej znajdziecie najczęstsze przyczyny:
   `lsof -i :11434` (macOS/Linux) albo `netstat -ano | findstr 11434` (Windows).
 - **Obrazy się nie pobierają (timeout, błąd certyfikatu)** — często to firmowy VPN lub proxy.
   Spróbujcie poza VPN-em albo na prywatnej sieci.
-- **Kontener się restartuje albo backend długo startuje** — dajcie Dockerowi więcej pamięci (co najmniej 4 GB)
+- **Kontener się restartuje albo któraś usługa nie startuje** — dajcie Dockerowi więcej pamięci (co najmniej 4 GB)
   i sprawdźcie logi: `docker compose -f lightweight-docker-compose.yml logs -f backend gateway`.
 - **`npx playwright install chromium` kończy się błędem** — zwykle to również proxy; spróbujcie innej sieci.
 - **Windows: `curl` zachowuje się inaczej** — w PowerShellu używajcie `curl.exe` zamiast `curl`.

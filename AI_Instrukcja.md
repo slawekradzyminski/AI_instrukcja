@@ -1,7 +1,7 @@
 # Przygotowanie środowiska do szkolenia z Playwright i AI
 
 Poniżej znajdziecie organizacyjne informacje oraz aktualną instrukcję przygotowania środowiska na szkolenie.
-Instrukcja została zweryfikowana 9 listopada 2026 r. z repozytorium `playwright-2026`
+Instrukcja została zweryfikowana 10 listopada 2026 r. z repozytorium `playwright-2026`
 i lekkim profilem `awesome-localstack` uruchomionym lokalnie.
 Proszę o sumienne przygotowanie. Jeśli pojawią się trudności techniczne, niczym się nie martwcie.
 Wszystkie problemy rozwiążemy wspólnie na szkoleniu.
@@ -369,7 +369,7 @@ Szczegółowy opis lekkiego profilu, adresów oraz kroków weryfikacyjnych znajd
 Po uruchomieniu sprawdźcie:
 
 ```bash
-docker compose -f lightweight-docker-compose.yml ps
+docker compose -f lightweight-docker-compose.yml ps -a
 curl -i http://localhost:8081/login
 curl -i http://localhost:8081/v3/api-docs
 curl -i http://localhost:8081/images/iphone.png
@@ -383,6 +383,7 @@ curl -i -X POST http://localhost:11434/api/generate \
 Oczekiwany rezultat:
 
 - serwisy `backend`, `frontend`, `gateway`, `keycloak`, `ollama-mock`, `postgres` i `warehouse-service` są w stanie `Up`
+- jednorazowe kontenery `postgres-roles` i `keycloak-init` mają stan `Exited (0)` — to poprawne, kończą pracę po przygotowaniu bazy i kont
 - strona logowania odpowiada `200`
 - OpenAPI odpowiada `200` (backend i magazyn)
 - obrazek produktu odpowiada `200`
@@ -403,7 +404,7 @@ Lokalne dane logowania:
 - klasyczne logowanie w aplikacji: `client` / `client`
 - klasyczne konto administratora: `admin` / `LocalDemoAdmin123!`
 - konto magazynu (wysyłki, zwroty, zamówienia u dostawców): `warehouse` / `warehouse`
-- SSO przez Keycloak: `sso-client` / `SsoClient123!`
+- SSO przez Keycloak: `sso-e2e-client` / `SsoClient123!`
 - Social login (Google mock): `google-user` / `GoogleUser123!`
 - Social login (GitHub mock): `github-user` / `GitHubUser123!`
 - panel administracyjny Keycloak: `admin` / `admin`
@@ -415,6 +416,9 @@ docker compose -f lightweight-docker-compose.yml logs -f backend gateway
 docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
 docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service
 ```
+
+Baza danych działa w pamięci, więc po `docker compose -f lightweight-docker-compose.yml down` i ponownym `up -d`
+aplikacja wraca do danych startowych. Wasze zmiany (rejestracje, zamówienia) znikną — tak ma być na szkoleniu.
 
 <a id="sekcja-testy"></a>
 # 7. Pobranie repozytorium z testami

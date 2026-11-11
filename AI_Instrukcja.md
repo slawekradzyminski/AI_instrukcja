@@ -345,6 +345,9 @@ Wewnątrz pobranego folderu uruchamiamy lekki profil szkoleniowy:
 docker compose -f lightweight-docker-compose.yml up -d
 ```
 
+Przy pierwszym uruchomieniu Docker buduje lokalnie obraz z dokumentacją (`docs`),
+więc potrzebny jest dostęp do internetu i chwila cierpliwości.
+
 To uruchamia jedną publiczną bramkę aplikacji pod adresem:
 
 - `http://localhost:8081`
@@ -353,7 +356,9 @@ Za tą bramką dostępne są:
 
 - frontend
 - backend API pod `/api/v1/...`
-- API magazynu (wysyłki, zwroty, zamówienia u dostawców) obsługiwane przez `warehouse-service`
+- API magazynu (wysyłki, śledzenie przesyłek, zwroty, zamówienia u dostawców) obsługiwane przez `warehouse-service`
+- API płatności (karty testowe, 3-D Secure, zwroty) obsługiwane przez `payment-service`
+- dokumentacja techniczna i biznesowa (wiki) pod `/docs/`
 - Swagger UI
 - obrazy produktów pod `/images/...`
 - mock LLM pod osobnym portem `11434`
@@ -374,6 +379,8 @@ curl -i http://localhost:8081/login
 curl -i http://localhost:8081/v3/api-docs
 curl -i http://localhost:8081/images/iphone.png
 curl -i http://localhost:8081/warehouse/v3/api-docs
+curl -i http://localhost:8081/payment/v3/api-docs
+curl -i http://localhost:8081/docs/
 curl -i http://localhost:8082/realms/awesome-testing/.well-known/openid-configuration
 curl -i -X POST http://localhost:11434/api/generate \
   -H 'Content-Type: application/json' \
@@ -382,10 +389,11 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Oczekiwany rezultat:
 
-- serwisy `backend`, `frontend`, `gateway`, `keycloak`, `ollama-mock`, `postgres` i `warehouse-service` są w stanie `Up`
+- serwisy `backend`, `docs`, `frontend`, `gateway`, `keycloak`, `ollama-mock`, `payment-service`, `postgres` i `warehouse-service` są w stanie `Up`
 - jednorazowe kontenery `postgres-roles` i `keycloak-init` mają stan `Exited (0)` — to poprawne, kończą pracę po przygotowaniu bazy i kont
 - strona logowania odpowiada `200`
-- OpenAPI odpowiada `200` (backend i magazyn)
+- OpenAPI odpowiada `200` (backend, magazyn i płatności)
+- dokumentacja (wiki) odpowiada `200`
 - obrazek produktu odpowiada `200`
 - konfiguracja OpenID Connect w Keycloak odpowiada `200`
 - mock LLM odpowiada `200`
@@ -393,7 +401,8 @@ Oczekiwany rezultat:
 Przydatne adresy do sprawdzenia w przeglądarce:
 
 - aplikacja: `http://localhost:8081/login`
-- Swagger: `http://localhost:8081/swagger-ui/index.html`
+- Swagger: `http://localhost:8081/swagger-ui/index.html` (lista definicji: backend, magazyn, płatności)
+- dokumentacja (wiki): `http://localhost:8081/docs/`
 - Keycloak: `http://localhost:8082`
 
 W Windows PowerShell można użyć `curl.exe` zamiast `curl`, jeśli ta nazwa jest
@@ -414,7 +423,7 @@ Jeśli coś jeszcze się uruchamia, najpierw sprawdźcie logi:
 ```bash
 docker compose -f lightweight-docker-compose.yml logs -f backend gateway
 docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
-docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service
+docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service payment-service
 ```
 
 Baza danych działa w pamięci, więc po `docker compose -f lightweight-docker-compose.yml down` i ponownym `up -d`

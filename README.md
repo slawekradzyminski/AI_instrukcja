@@ -16,6 +16,6 @@ Aktualne repozytoria używane na szkoleniu:
 - [playwright-2026](https://github.com/slawekradzyminski/playwright-2026) — testy API i UI
 - [awesome-localstack](https://github.com/slawekradzyminski/awesome-localstack) — lokalne środowisko aplikacji
 
-Konfiguracja została zweryfikowana 10 listopada 2026 r. z Node.js 24 LTS,
+Konfiguracja została zweryfikowana 11 listopada 2026 r. z Node.js 24 LTS,
 lekkim profilem Docker Compose (Docker Desktop lub Rancher Desktop) i bramką aplikacji
 pod adresem `http://localhost:8081`.

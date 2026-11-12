@@ -21,9 +21,9 @@ Wszystko poniżej prowadzi do tego jednego wyniku.
 - **Ile to trwa:** zwykle 30–60 minut, z agentem AI często krócej.
 - **Czego potrzebujecie:**
   - macOS, Windows 10/11 (z WSL 2) albo Linux, najlepiej z uprawnieniami administratora;
-  - co najmniej 8 GB RAM w komputerze (16 GB zapewnia wygodną pracę), z czego warto dać Dockerowi około 4 GB (samo środowisko szkoleniowe zajmuje około 1,5 GB);
+  - co najmniej 8 GB RAM w komputerze (16 GB zapewnia wygodną pracę), z czego warto dać Dockerowi około 4 GB (samo środowisko szkoleniowe zajmuje poniżej 1 GB);
   - około 5 GB wolnego miejsca na dysku;
-  - wolne porty `8081`, `8082` i `11434`.
+  - wolne porty `8081` i `11434`.
 - **Docker Desktop albo Rancher Desktop:** oba działają. Jeśli w Waszej firmie Docker Desktop wymaga płatnej licencji,
   wybierzcie Rancher Desktop ([sekcja 5](#sekcja-srodowisko)).
 - **Gdy Dockera nie da się uruchomić:** testy można puścić na wspólnym środowisku szkoleniowym
@@ -362,7 +362,6 @@ Za tą bramką dostępne są:
 - Swagger UI
 - obrazy produktów pod `/images/...`
 - mock LLM pod osobnym portem `11434`
-- Keycloak / SSO pod osobnym portem `8082`
 
 Szczegółowy opis lekkiego profilu, adresów oraz kroków weryfikacyjnych znajdziecie tutaj:
 
@@ -381,7 +380,6 @@ curl -i http://localhost:8081/images/iphone.png
 curl -i http://localhost:8081/warehouse/v3/api-docs
 curl -i http://localhost:8081/payment/v3/api-docs
 curl -i http://localhost:8081/docs/
-curl -i http://localhost:8082/realms/awesome-testing/.well-known/openid-configuration
 curl -i -X POST http://localhost:11434/api/generate \
   -H 'Content-Type: application/json' \
   -d '{"model":"qwen3.5:2b","prompt":"hello"}'
@@ -389,13 +387,12 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Oczekiwany rezultat:
 
-- serwisy `backend`, `docs`, `frontend`, `gateway`, `keycloak`, `ollama-mock`, `payment-service`, `postgres` i `warehouse-service` są w stanie `Up`
-- jednorazowe kontenery `postgres-roles` i `keycloak-init` mają stan `Exited (0)` — to poprawne, kończą pracę po przygotowaniu bazy i kont
+- serwisy `backend`, `docs`, `frontend`, `gateway`, `ollama-mock`, `payment-service`, `postgres` i `warehouse-service` są w stanie `Up`
+- jednorazowy kontener `postgres-roles` ma stan `Exited (0)` — to poprawne, kończy pracę po przygotowaniu bazy
 - strona logowania odpowiada `200`
 - OpenAPI odpowiada `200` (backend, magazyn i płatności)
 - dokumentacja (wiki) odpowiada `200`
 - obrazek produktu odpowiada `200`
-- konfiguracja OpenID Connect w Keycloak odpowiada `200`
 - mock LLM odpowiada `200`
 
 Przydatne adresy do sprawdzenia w przeglądarce:
@@ -403,7 +400,6 @@ Przydatne adresy do sprawdzenia w przeglądarce:
 - aplikacja: `http://localhost:8081/login`
 - Swagger: `http://localhost:8081/swagger-ui/index.html` (lista definicji: backend, magazyn, płatności)
 - dokumentacja (wiki): `http://localhost:8081/docs/`
-- Keycloak: `http://localhost:8082`
 
 W Windows PowerShell można użyć `curl.exe` zamiast `curl`, jeśli ta nazwa jest
 przechwytywana przez alias PowerShella.
@@ -413,16 +409,15 @@ Lokalne dane logowania:
 - klasyczne logowanie w aplikacji: `client` / `client`
 - klasyczne konto administratora: `admin` / `LocalDemoAdmin123!`
 - konto magazynu (wysyłki, zwroty, zamówienia u dostawców): `warehouse` / `warehouse`
-- SSO przez Keycloak: `sso-e2e-client` / `SsoClient123!`
-- Social login (Google mock): `google-user` / `GoogleUser123!`
-- Social login (GitHub mock): `github-user` / `GitHubUser123!`
-- panel administracyjny Keycloak: `admin` / `admin`
+
+Logowanie przez SSO oraz Google/GitHub (Keycloak) zostało usunięte ze środowiska. Jeśli na stronie logowania
+widzicie jeszcze przyciski SSO, Google lub GitHub, pomińcie je i zalogujcie się hasłem.
 
 Jeśli coś jeszcze się uruchamia, najpierw sprawdźcie logi:
 
 ```bash
 docker compose -f lightweight-docker-compose.yml logs -f backend gateway
-docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
+docker compose -f lightweight-docker-compose.yml logs -f ollama-mock
 docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service payment-service
 ```
 
@@ -490,7 +485,7 @@ Jeśli agent też się poddał, poniżej znajdziecie najczęstsze przyczyny:
 
 - **`docker: command not found` po instalacji Rancher Desktop** — sprawdźcie, czy w Preferences → Container Engine
   wybrany jest **dockerd (moby)**, a potem otwórzcie nowy terminal (lub uruchomcie komputer ponownie).
-- **Port jest zajęty (`port is already allocated`)** — na `8081`, `8082` lub `11434` działa już inna aplikacja.
+- **Port jest zajęty (`port is already allocated`)** — na `8081` lub `11434` działa już inna aplikacja.
   Najczęściej to lokalnie zainstalowana **Ollama** (port `11434`) albo inny projekt w Dockerze.
   Zatrzymajcie ją na czas szkolenia lub sprawdźcie, co zajmuje port:
   `lsof -i :11434` (macOS/Linux) albo `netstat -ano | findstr 11434` (Windows).

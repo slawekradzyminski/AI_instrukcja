@@ -410,8 +410,7 @@ Lokalne dane logowania:
 - klasyczne konto administratora: `admin` / `LocalDemoAdmin123!`
 - konto magazynu (wysyłki, zwroty, zamówienia u dostawców): `warehouse` / `warehouse`
 
-Logowanie przez SSO oraz Google/GitHub (Keycloak) zostało usunięte ze środowiska. Jeśli na stronie logowania
-widzicie jeszcze przyciski SSO, Google lub GitHub, pomińcie je i zalogujcie się hasłem.
+Logowanie przez SSO oraz Google/GitHub (Keycloak) zostało usunięte ze środowiska; logujcie się hasłem.
 
 Jeśli coś jeszcze się uruchamia, najpierw sprawdźcie logi:
 

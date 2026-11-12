@@ -21,9 +21,9 @@ Everything below leads to that one result.
 - **How long:** usually 30–60 minutes, often less with an AI agent.
 - **What you need:**
   - macOS, Windows 10/11 (with WSL 2) or Linux, ideally with administrator rights;
-  - at least 8 GB of RAM in the computer (16 GB is comfortable), of which you should give Docker about 4 GB (the training stack itself uses about 1.5 GB);
+  - at least 8 GB of RAM in the computer (16 GB is comfortable), of which you should give Docker about 4 GB (the training stack itself uses less than 1 GB);
   - about 5 GB of free disk space;
-  - free ports `8081`, `8082` and `11434`.
+  - free ports `8081` and `11434`.
 - **Docker Desktop or Rancher Desktop:** both work. If Docker Desktop requires a paid licence at your company,
   choose Rancher Desktop ([section 5](#environment-section)).
 - **If Docker cannot run at all:** you can run the tests against the shared training environment
@@ -362,7 +362,6 @@ Behind this gateway you have:
 - Swagger UI
 - product images under `/images/...`
 - mock LLM on a separate port `11434`
-- Keycloak / SSO on a separate port `8082`
 
 For a more detailed lightweight-profile walkthrough, URLs, and verification steps, use:
 
@@ -381,7 +380,6 @@ curl -i http://localhost:8081/images/iphone.png
 curl -i http://localhost:8081/warehouse/v3/api-docs
 curl -i http://localhost:8081/payment/v3/api-docs
 curl -i http://localhost:8081/docs/
-curl -i http://localhost:8082/realms/awesome-testing/.well-known/openid-configuration
 curl -i -X POST http://localhost:11434/api/generate \
   -H 'Content-Type: application/json' \
   -d '{"model":"qwen3.5:2b","prompt":"hello"}'
@@ -389,13 +387,12 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Expected result:
 
-- the `backend`, `docs`, `frontend`, `gateway`, `keycloak`, `ollama-mock`, `payment-service`, `postgres` and `warehouse-service` services are in the `Up` state
-- the one-shot `postgres-roles` and `keycloak-init` containers show `Exited (0)` — that is correct, they stop after preparing the database and the accounts
+- the `backend`, `docs`, `frontend`, `gateway`, `ollama-mock`, `payment-service`, `postgres` and `warehouse-service` services are in the `Up` state
+- the one-shot `postgres-roles` container shows `Exited (0)` — that is correct, it stops after preparing the database
 - the login page returns `200`
 - OpenAPI returns `200` (backend, warehouse and payments)
 - the documentation wiki returns `200`
 - the product image returns `200`
-- the Keycloak OpenID Connect configuration returns `200`
 - the mock LLM returns `200`
 
 Useful browser URLs:
@@ -403,7 +400,6 @@ Useful browser URLs:
 - app: `http://localhost:8081/login`
 - Swagger: `http://localhost:8081/swagger-ui/index.html` (definitions: backend, warehouse, payments)
 - documentation wiki: `http://localhost:8081/docs/`
-- Keycloak: `http://localhost:8082`
 
 In Windows PowerShell, use `curl.exe` instead of `curl` if the name is intercepted
 by a PowerShell alias.
@@ -413,16 +409,15 @@ Local credentials:
 - standard app login: `client` / `client`
 - standard administrator account: `admin` / `LocalDemoAdmin123!`
 - warehouse account (shipments, returns, purchasing): `warehouse` / `warehouse`
-- SSO through Keycloak: `sso-e2e-client` / `SsoClient123!`
-- Social login (Google mock): `google-user` / `GoogleUser123!`
-- Social login (GitHub mock): `github-user` / `GitHubUser123!`
-- Keycloak admin console: `admin` / `admin`
+
+SSO and the Google/GitHub social login (Keycloak) were removed from the stack. If the login page still shows
+SSO, Google or GitHub buttons, ignore them and sign in with a password.
 
 If something is still starting, check logs first:
 
 ```bash
 docker compose -f lightweight-docker-compose.yml logs -f backend gateway
-docker compose -f lightweight-docker-compose.yml logs -f keycloak ollama-mock
+docker compose -f lightweight-docker-compose.yml logs -f ollama-mock
 docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service payment-service
 ```
 
@@ -490,7 +485,7 @@ If the agent gives up too, here are the most common causes:
 
 - **`docker: command not found` after installing Rancher Desktop** — check that Preferences → Container Engine
   is set to **dockerd (moby)**, then open a new terminal (or restart the computer).
-- **A port is already in use (`port is already allocated`)** — another application already uses `8081`, `8082` or `11434`.
+- **A port is already in use (`port is already allocated`)** — another application already uses `8081` or `11434`.
   Most often it is a locally installed **Ollama** (port `11434`) or another Docker project.
   Stop it for the training or check what uses the port:
   `lsof -i :11434` (macOS/Linux) or `netstat -ano | findstr 11434` (Windows).

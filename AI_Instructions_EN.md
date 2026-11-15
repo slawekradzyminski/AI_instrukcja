@@ -358,6 +358,7 @@ Behind this gateway you have:
 - backend API under `/api/v1/...`
 - warehouse API (shipments, parcel tracking, returns, purchasing) served by `warehouse-service`
 - payments API (test cards, 3-D Secure, refunds) served by `payment-service`
+- notifications API (webhooks, webhook inboxes, order emails) served by `notification-service`
 - technical and business documentation (wiki) under `/docs/`
 - Swagger UI
 - product images under `/images/...`
@@ -379,6 +380,7 @@ curl -i http://localhost:8081/v3/api-docs
 curl -i http://localhost:8081/images/iphone.png
 curl -i http://localhost:8081/warehouse/v3/api-docs
 curl -i http://localhost:8081/payment/v3/api-docs
+curl -i http://localhost:8081/notification/v3/api-docs
 curl -i http://localhost:8081/docs/
 curl -i -X POST http://localhost:11434/api/generate \
   -H 'Content-Type: application/json' \
@@ -387,10 +389,10 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Expected result:
 
-- the `backend`, `docs`, `frontend`, `gateway`, `ollama-mock`, `payment-service`, `postgres` and `warehouse-service` services are in the `Up` state
+- the `backend`, `docs`, `frontend`, `gateway`, `notification-service`, `ollama-mock`, `payment-service`, `postgres` and `warehouse-service` services are in the `Up` state
 - the one-shot `postgres-roles` container shows `Exited (0)` — that is correct, it stops after preparing the database
 - the login page returns `200`
-- OpenAPI returns `200` (backend, warehouse and payments)
+- OpenAPI returns `200` (backend, warehouse, payments and notifications)
 - the documentation wiki returns `200`
 - the product image returns `200`
 - the mock LLM returns `200`
@@ -417,7 +419,7 @@ If something is still starting, check logs first:
 ```bash
 docker compose -f lightweight-docker-compose.yml logs -f backend gateway
 docker compose -f lightweight-docker-compose.yml logs -f ollama-mock
-docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service payment-service
+docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service payment-service notification-service
 ```
 
 The database runs in memory, so after `docker compose -f lightweight-docker-compose.yml down` and another `up -d`

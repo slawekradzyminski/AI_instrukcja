@@ -1,7 +1,7 @@
 # Playwright and AI Training Environment Setup
 
 Below you will find organizational information and the current environment setup guide for the training.
-This guide was verified on November 10, 2026 with the `playwright-2026` repository
+This guide was verified on November 15, 2026 with the `playwright-2026` repository
 and the lightweight `awesome-localstack` profile running locally.
 Please prepare carefully. If you run into technical issues, do not worry.
 We will solve all problems together during the training.

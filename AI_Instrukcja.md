@@ -1,7 +1,7 @@
 # Przygotowanie środowiska do szkolenia z Playwright i AI
 
 Poniżej znajdziecie organizacyjne informacje oraz aktualną instrukcję przygotowania środowiska na szkolenie.
-Instrukcja została zweryfikowana 10 listopada 2026 r. z repozytorium `playwright-2026`
+Instrukcja została zweryfikowana 15 listopada 2026 r. z repozytorium `playwright-2026`
 i lekkim profilem `awesome-localstack` uruchomionym lokalnie.
 Proszę o sumienne przygotowanie. Jeśli pojawią się trudności techniczne, niczym się nie martwcie.
 Wszystkie problemy rozwiążemy wspólnie na szkoleniu.

@@ -1,7 +1,7 @@
 # Przygotowanie środowiska do szkolenia z Playwright i AI
 
 Poniżej znajdziecie organizacyjne informacje oraz aktualną instrukcję przygotowania środowiska na szkolenie.
-Instrukcja została zweryfikowana 10 listopada 2026 r. z repozytorium `playwright-2026`
+Instrukcja została zweryfikowana 15 listopada 2026 r. z repozytorium `playwright-2026`
 i lekkim profilem `awesome-localstack` uruchomionym lokalnie.
 Proszę o sumienne przygotowanie. Jeśli pojawią się trudności techniczne, niczym się nie martwcie.
 Wszystkie problemy rozwiążemy wspólnie na szkoleniu.
@@ -358,6 +358,7 @@ Za tą bramką dostępne są:
 - backend API pod `/api/v1/...`
 - API magazynu (wysyłki, śledzenie przesyłek, zwroty, zamówienia u dostawców) obsługiwane przez `warehouse-service`
 - API płatności (karty testowe, 3-D Secure, zwroty) obsługiwane przez `payment-service`
+- API powiadomień (webhooki, skrzynki webhooków, e-maile o zamówieniach) obsługiwane przez `notification-service`
 - dokumentacja techniczna i biznesowa (wiki) pod `/docs/`
 - Swagger UI
 - obrazy produktów pod `/images/...`
@@ -379,6 +380,7 @@ curl -i http://localhost:8081/v3/api-docs
 curl -i http://localhost:8081/images/iphone.png
 curl -i http://localhost:8081/warehouse/v3/api-docs
 curl -i http://localhost:8081/payment/v3/api-docs
+curl -i http://localhost:8081/notification/v3/api-docs
 curl -i http://localhost:8081/docs/
 curl -i -X POST http://localhost:11434/api/generate \
   -H 'Content-Type: application/json' \
@@ -387,10 +389,10 @@ curl -i -X POST http://localhost:11434/api/generate \
 
 Oczekiwany rezultat:
 
-- serwisy `backend`, `docs`, `frontend`, `gateway`, `ollama-mock`, `payment-service`, `postgres` i `warehouse-service` są w stanie `Up`
+- serwisy `backend`, `docs`, `frontend`, `gateway`, `notification-service`, `ollama-mock`, `payment-service`, `postgres` i `warehouse-service` są w stanie `Up`
 - jednorazowy kontener `postgres-roles` ma stan `Exited (0)` — to poprawne, kończy pracę po przygotowaniu bazy
 - strona logowania odpowiada `200`
-- OpenAPI odpowiada `200` (backend, magazyn i płatności)
+- OpenAPI odpowiada `200` (backend, magazyn, płatności i powiadomienia)
 - dokumentacja (wiki) odpowiada `200`
 - obrazek produktu odpowiada `200`
 - mock LLM odpowiada `200`
@@ -417,7 +419,7 @@ Jeśli coś jeszcze się uruchamia, najpierw sprawdźcie logi:
 ```bash
 docker compose -f lightweight-docker-compose.yml logs -f backend gateway
 docker compose -f lightweight-docker-compose.yml logs -f ollama-mock
-docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service payment-service
+docker compose -f lightweight-docker-compose.yml logs -f postgres warehouse-service payment-service notification-service
 ```
 
 Baza danych działa w pamięci, więc po `docker compose -f lightweight-docker-compose.yml down` i ponownym `up -d`

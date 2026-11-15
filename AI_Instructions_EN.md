@@ -410,8 +410,7 @@ Local credentials:
 - standard administrator account: `admin` / `LocalDemoAdmin123!`
 - warehouse account (shipments, returns, purchasing): `warehouse` / `warehouse`
 
-SSO and the Google/GitHub social login (Keycloak) were removed from the stack. If the login page still shows
-SSO, Google or GitHub buttons, ignore them and sign in with a password.
+SSO and the Google/GitHub social login (Keycloak) were removed from the stack; sign in with a password.
 
 If something is still starting, check logs first:
 
